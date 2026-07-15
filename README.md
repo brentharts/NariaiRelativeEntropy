@@ -88,4 +88,5 @@ From `make verify` (kappa = 1):
 
 ## Papers
 - https://doi.org/10.5281/zenodo.21303604
+- https://doi.org/10.5281/zenodo.21382744
 
