@@ -6,6 +6,7 @@
 #   make selftest     -> pass/fail assertions on every claim
 #   make convergence  -> grid and truncation study
 #   make lean         -> regenerate and kernel-check NariaiFacts.lean
+#   make exact        -> exact-spectrum packet + Fock relative entropy
 #   make docs     -> supplementary
 #   make clean        -> remove build artifacts (keeps PDFs)
 #   make distclean    -> remove build artifacts and PDFs
@@ -40,8 +41,11 @@ convergence: appendix_b_verification.py
 	$(PY) appendix_b_verification.py --convergence
 
 # --- machine-checked fragments -----------------------------------------
-lean: nariailean.py
+lean: nariailean.py nariai_exact.py
 	$(PY) nariailean.py --check
+
+exact: nariai_exact.py
+	$(PY) nariai_exact.py
 
 
 

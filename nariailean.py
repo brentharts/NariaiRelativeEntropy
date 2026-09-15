@@ -41,12 +41,19 @@ What is proved here
 
 What is NOT proved here
 -----------------------
-That the numerical packet of appendix_b_verification.py has strictly
-positive spectrum -- it is a truncated Gaussian on a finite grid, and the
-truncation is exactly where the measured |I2|/I1 stops being 1e-15 (see the
-convergence study).  That the covariance formalism computes the Araki
-relative entropy.  That any of this is a statement about the continuum.  The
-Lean layer proves the algebra; the analysis stays in the paper.
+That any of this is a statement about the continuum.  The Lean layer proves
+the algebra; the analysis stays in the paper.
+
+Two items that used to be on this list have moved off it, and section 5
+below is the reason for the first.  The packet of
+appendix_b_verification.py is a truncated Gaussian and does NOT have
+strictly positive spectrum, so the theorems of section 2 did not apply to
+it; nariai_exact.py builds one that does, on an integer frequency grid, and
+section 5 instantiates the theorem at that exact index list.  And the claim
+that the covariance formalism computes the Araki relative entropy is now
+checked against the definition in a truncated Fock space rather than
+asserted.  Neither is a Lean proof -- the second is numerics -- but neither
+is an admission any more either.
 
     python3 nariailean.py            # write NariaiFacts.lean
     python3 nariailean.py --stdout
@@ -56,6 +63,8 @@ Lean layer proves the algebra; the analysis stays in the paper.
 import os
 import subprocess
 import sys
+
+import nariai_exact as X
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUTPUT = os.path.join(HERE, 'NariaiFacts.lean')
@@ -324,12 +333,68 @@ theorem detector_zero_iff_no_admixture (p q : Int) (hq : 0 < q) :
 """
 
 
+def instantiation_section():
+    """The sumset theorem, applied to the spectrum actually computed."""
+    idx = X.spectrum_indices()
+    lo, hi = X.sumset_range(idx)
+    return r"""
+/-! ## 5. The theorem, instantiated at the spectrum actually used
+
+Section 2 proves the dichotomy for arbitrary finite spectra.  That is only
+worth having if some computed object satisfies its hypothesis, and a
+truncated Gaussian does not: its spectrum has a tail through every frequency
+down to the cutoff, so "strictly positive" holds only up to the truncation --
+and the convergence study in the companion README finds the dominant
+numerical error at exactly that truncation.
+
+`nariai_exact.py` therefore builds the packet differently.  On a periodic
+grid of %d points over length %g, a packet supported on the integer
+frequency indices %d..%d has a spectrum that is strictly positive as an
+exact property of integers, with nothing truncated and no tail.  `I2` is
+then the zero bin of a discrete Fourier transform rather than a quadrature,
+and the spectrum of `(d_u chi)^2` occupies bins %d..%d, which is checked
+against the transform and agrees.
+
+So the list below is not an illustration.  It is the spectrum the numerics
+run on, and the two theorems establish that the object computed there has
+`I2 = 0` for the reason the paper says it does. -/
+
+/-- The frequency indices of the packet in `nariai_exact.exact_packet`. -/
+def packetSpectrum : List Int := %s
+
+/-- Its entries are strictly positive -- the hypothesis of section 2,
+discharged by computation on the actual list. -/
+theorem packetSpectrum_positive : ∀ w ∈ packetSpectrum, 0 < w := by decide
+
+/-- Hence no two of its frequencies sum to zero, hence `I2 = 0`. -/
+theorem packetSpectrum_avoids_zero : ¬ sumsetHasZero packetSpectrum :=
+  positive_spectrum_avoids_zero packetSpectrum packetSpectrum_positive
+
+/-- The sumset is bounded below by twice the least frequency, which is why
+the occupied bins start at %d and the zero bin is empty by a margin rather
+than by cancellation. -/
+theorem packetSpectrum_sumset_lower_bound :
+    ∀ a ∈ packetSpectrum, ∀ b ∈ packetSpectrum, %d ≤ a + b := by decide
+
+/-- The general statement behind that bound: an interval spectrum bounded
+below by a positive `m` has its sumset bounded below by `2m`. -/
+theorem interval_spectrum_sumset (ws : List Int) (m : Int) (hm : 0 < m)
+    (h : ∀ w ∈ ws, m ≤ w) : ∀ a ∈ ws, ∀ b ∈ ws, 2*m ≤ a + b := by
+  intro a ha b hb
+  have h1 := h a ha
+  have h2 := h b hb
+  omega
+""" % (X.GRID_POINTS, X.GRID_LENGTH, min(idx), max(idx), lo, hi,
+       '[' + ', '.join(str(j) for j in idx) + ']', lo, lo)
+
+
 def document(audit=None):
     return (PREAMBLE % (audit or AUDIT_PENDING)
             + weight_section()
             + sumset_section()
             + squeeze_section()
-            + detector_section())
+            + detector_section()
+            + instantiation_section())
 
 
 def theorem_names(text):

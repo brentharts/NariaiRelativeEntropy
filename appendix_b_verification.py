@@ -48,6 +48,11 @@ true identity needs the derivative factors that accompany it in the
 integrand.  `check_modular_weight_exponents` below states the correct form,
 and NariaiFacts.lean proves the exponent balance.
 
+The packet here is still the truncated Gaussian, which is why its |I2|/I1
+depends on the truncation.  nariai_exact.py builds one whose spectrum is
+strictly positive as a property of integers, so the Lean theorem applies to
+it directly and the ratio stays at roundoff for every carrier.
+
     python3 appendix_b_verification.py
     python3 appendix_b_verification.py --selftest
     python3 appendix_b_verification.py --convergence

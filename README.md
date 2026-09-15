@@ -76,6 +76,7 @@ is the zero-total-boost-frequency Fourier component of `(d_u chi)^2` and
 | `supplementary.tex` | Supplementary material: TikZ diagrams + numerical figures |
 | `appendix_b_verification.py` | Numerical checks for Appendix B (I2 vanishing, negativity windows, one-mode sum rule) |
 | `nariailean.py` | Emits `NariaiFacts.lean`: the finite algebra behind Appendix B |
+| `nariai_exact.py` | Exactly-positive-spectrum packet; Araki relative entropy from the definition |
 | `NariaiFacts.lean` | Mathlib-free Lean 4, kernel-checked, no admitted proofs |
 | `generate_figures.py` | Generates Figures S1-S3 (matplotlib) into `figures/` |
 | `Makefile` | Build system |
@@ -87,6 +88,7 @@ make verify        # run the numerical checks (numpy)
 make selftest      # pass/fail assertions on every claim
 make convergence   # grid and truncation study for the I2 vanishing
 make lean          # regenerate and kernel-check NariaiFacts.lean
+make exact         # exact-spectrum packet + Fock-space relative entropy
 make figures       # regenerate Figures S1-S3 (matplotlib)
 make               # build supplementary.pdf (needs pdflatex + TikZ)
 ```
@@ -153,6 +155,43 @@ algebra rather than analysis:
 * the detector bound and its saturation condition.
 
 The analysis stays in the paper. What Lean settles is the algebra.
+
+### Closing the gap to the physics
+
+Three admissions used to sit between the Lean layer and the numerics.
+`nariai_exact.py` closes two of them.
+
+**The Lean hypothesis now holds of the object actually computed.** The
+sumset theorem assumes a strictly positive spectrum, which a truncated
+Gaussian does not have -- and the convergence study puts the dominant error
+at exactly that truncation. On a periodic grid a packet supported on integer
+frequency indices `20..40` has a strictly positive spectrum as a property of
+integers, with no tail. `I2` is then the zero bin of a DFT rather than a
+quadrature, the spectrum of `(d_u chi)^2` occupies bins `40..80` (checked
+against the transform), and `NariaiFacts.lean` instantiates the theorem at
+that exact index list. The result no longer degrades as the spectrum
+approaches zero, because nothing is being truncated:
+
+| lowest index | truncated Gaussian analogue | exact integer spectrum |
+|---|---|---|
+| `jmin = 1` | — | `6.0e-16` |
+| `jmin = 5` | — | `5.7e-16` |
+| `jmin = 20` | `1.3e-15` | `4.7e-16` |
+| `jmin = 60` | — | `8.7e-16` |
+
+**The covariance formula is the Araki relative entropy.** `Tr rho (ln rho -
+ln sigma)` is now computed directly from matrices in a truncated Fock space
+-- squeeze operator by matrix exponential, logs by eigendecomposition, no
+covariance matrix and no first law anywhere -- and agrees with
+`beta*w*nu*sinh^2(r)` to `1.4e-15`, `1.9e-11`, with clean convergence in the
+Fock cutoff (`1.9e-03 -> 3.8e-06 -> 1.9e-11` at `N = 60, 120, 240`).
+
+**The continuum stays open.** What is measurable is that the discretisation
+reproduces an exactly known continuum quantity: by Parseval the continuum
+`I1` is `2*pi*int w^2 |a(w)|^2 dw`, and the pipeline matches quadrature to
+`2e-13`. That validates the discretisation. It does not prove the continuum
+vanishing theorem, which concerns improper integrals of distributions and is
+not going to be settled on a grid.
 
 ## Status and open problems
 
