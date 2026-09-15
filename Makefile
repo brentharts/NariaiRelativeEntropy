@@ -3,6 +3,9 @@
 #   make              -> supplementary.pdf (figures + TikZ document)
 #   make figures      -> regenerate matplotlib figures into figures/
 #   make verify       -> run the Appendix B numerical checks
+#   make selftest     -> pass/fail assertions on every claim
+#   make convergence  -> grid and truncation study
+#   make lean         -> regenerate and kernel-check NariaiFacts.lean
 #   make docs     -> supplementary
 #   make clean        -> remove build artifacts (keeps PDFs)
 #   make distclean    -> remove build artifacts and PDFs
@@ -29,6 +32,16 @@ figures: $(FIGS)
 # --- numerical verification (Appendix B of the main paper) --------------
 verify: appendix_b_verification.py
 	$(PY) appendix_b_verification.py
+
+selftest: appendix_b_verification.py
+	$(PY) appendix_b_verification.py --selftest
+
+convergence: appendix_b_verification.py
+	$(PY) appendix_b_verification.py --convergence
+
+# --- machine-checked fragments -----------------------------------------
+lean: nariailean.py
+	$(PY) nariailean.py --check
 
 
 
