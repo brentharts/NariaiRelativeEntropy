@@ -2,9 +2,10 @@
 
 Companion repository for the paper
 
-> **Relative Entropy on the Nariai Horizon: A Finite-Area Completion of the
-> Entropic Derivation of the Semiclassical Einstein Equations**
+> **Gravity from Relative Entropy:
+> Jackiw–Teitelboim Dynamics on the Nariai Horizon**
 > (B. S. Hartshorn, 2026, draft)
+> https://www.researchsquare.com/article/rs-10426867/v1
 
 which extends Dorau & Much, *From Quantum Relative Entropy to the
 Semiclassical Einstein Equations*, Phys. Rev. Lett. **136**, 091602 (2026)
