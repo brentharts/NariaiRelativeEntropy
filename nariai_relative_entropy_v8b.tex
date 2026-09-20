@@ -1,0 +1,952 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,mathtools}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{orcidlink}
+\hypersetup{colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black}
+
+\newcommand{\Srel}{S^{\mathrm{rel}}}
+\newcommand{\Nariai}{Nariai}
+
+\title{\textbf{Gravity from Relative Entropy:}\\ Jackiw--Teitelboim Dynamics on the \Nariai{} Horizon}
+\author{Brent S. Hartshorn \orcidlink{0009-0004-2853-655X} (\url{brenthartshorn@proton.me})}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Dorau and Much (2026) \cite{DorauMuch} have shown, using Tomita--Takesaki modular theory, that the Araki--Uhlmann relative entropy between the vacuum and a coherent excitation of a scalar field on a local Rindler horizon equals the boost-energy flux across the horizon, and that the semiclassical Einstein equations follow once this relative entropy is identified. Two limitations remain: the Rindler bifurcation surface has infinite area, so only area \emph{variations} are meaningful, and the derivation leaves open what the Bekenstein--Hawking normalization $\Srel = \delta A/4$ is counting.
+
+We move the construction from the local Rindler wedge to the \Nariai{} spacetime, with a global bifurcate Killing horizon and \emph{compact} bifurcation surface area $A = 4\pi/\Lambda$. We compute the relative entropy for coherent excitations on the \Nariai{} horizon --- factorizing the transverse sphere out of the Araki--Uhlmann formula mode by mode, evaluating the entropy for a family of $s$-wave excitations --- and verify that $\Srel = \delta A/4$ reproduces the Einstein coupling $\alpha = 8\pi$ without infinite-area subtraction.
+
+The $s$-wave backreaction of the throat is exactly linearized de~Sitter Jackiw--Teitelboim gravity, whose dilaton equation admits the response model as its unique zero-mode-free solution, with the coupling $8\pi$ fixed by the dimensional reduction.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Jacobson's 1995 observation that the Einstein equations can be recovered from the Clausius relation $\delta Q = T\,\delta S$ applied to local Rindler horizons recast gravity as thermodynamics \cite{Jacobson}: an equation of state rather than a fundamental force law. The argument, however, borrowed its entropy from black-hole thermodynamics wholesale, leaving unspecified both the statistical system to which that entropy belongs and the quantum theory in which the heat flux $\delta Q$ is defined. Dorau and Much have recently closed the second gap \cite{DorauMuch}: working entirely within algebraic quantum field theory, they showed that the Araki--Uhlmann relative entropy between a quasifree vacuum state $\omega_0$ and its coherent excitation $\omega_\phi$, evaluated on the horizon algebra of a bifurcate Killing horizon, is
+\begin{equation}
+\Srel(\omega_0 \,\|\, \omega_\phi)
+= -2\pi \int_{\mathcal{H}^{\mathcal{R}}} U \,\langle{:}T_{ab}{:}\rangle_{\omega_\phi}\, \xi^a \xi^b \, dU\, d\mathrm{vol}_{\mathcal{S}},
+\label{eq:DM-pivot}
+\end{equation}
+i.e.\ precisely the boost-energy flux that plays the role of $\delta Q$ in Jacobson's argument \cite{Jacobson}. The heat is no longer thermodynamic bookkeeping; it is a theorem of modular theory. Assuming the Bekenstein--Hawking normalization $\Srel = \delta A/4$ then fixes the coupling of the resulting field equations to $8\pi$, and the semiclassical Einstein equations follow.
+
+This theorem-driven route contrasts with the parallel ``gravity from entropy'' proposal of Bianconi \cite{Bianconi2025,Bianconi2026}, in which the gravitational action is \emph{defined} as a quantum relative entropy between the spacetime metric and a matter-induced metric, and modified Einstein equations follow by variation --- at the price of truncations (a reduced Dirac--K\"ahler field content, an auxiliary-field reformulation) whose consistency with the general theory is not demonstrated. The route pursued here is complementary: no new action and no truncation, but a chain of theorems --- modular theory on an exact solution --- in which every quantity is finite and every step is either derived or explicitly flagged as a postulate. The two programs converge on the question both must ultimately answer: what the entropy that sources gravity is an entropy \emph{of}.
+
+Two features of the Dorau--Much derivation \cite{DorauMuch} require completion. The first is geometric: the local Rindler wedge has a bifurcation surface of infinite area, so only the \emph{variation} $\delta A$ is defined, the total entropy is formally infinite, and the identification $\Srel = \delta A/4$ can only ever be tested at first order. The second is conceptual: if gravity is emergent from entropy, \emph{entropy of what?} The theorem \eqref{eq:DM-pivot} computes the entropy of a coherent excitation relative to the vacuum, but the normalization $\delta A/4$ imports a statement about gravitational microstates whose identity the derivation does not supply. An answer requires either a microscopic counting or a reinterpretation of what kind of quantity horizon entropy is.
+
+We address both by moving the construction to a global spacetime: the \Nariai{} geometry $dS_2 \times S^2$, the degenerate limit of the Schwarzschild--de~Sitter family in which the black-hole and cosmological horizons merge at the common radius $r = 1/\sqrt{\Lambda}$ \cite{Nariai}. \Nariai{} offers three distinct physical advantages over the Rindler wedge:
+
+1. \Nariai{} possesses a global bifurcate Killing horizon whose bifurcation surface is a round two-sphere of area $A = 4\pi/\Lambda$. Every object in the derivation --- the Kay--Wald scaling-limit two-point function, the Summers--Verch modular dilations, the relative entropy \eqref{eq:DM-pivot}, and the horizon area itself --- is finite, and the identification $\Srel = \delta A/4$ can be confronted with a finite total entropy $A/4 = \pi/\Lambda$, the maximal horizon entropy attainable in the SdS family at fixed $\Lambda$. \Nariai{} is not just \emph{an} example with compact cross-section; it is the \emph{extremal} one.
+
+2. In generic Schwarzschild--de~Sitter the two horizons carry different surface gravities, no global equilibrium Kubo--Martin--Schwinger (KMS) state exists, and the algebraic construction underlying \eqref{eq:DM-pivot} must be applied to each horizon separately, with well-known ambiguities. In the \Nariai{} limit the surface gravities degenerate, a single Killing flow governs the full horizon, and a genuinely global KMS structure is restored.
+
+3. \Nariai{} sits at an unstable equilibrium: perturbations drive it toward either evaporation or anti-evaporation, the two branches identified by Bousso and Hawking. Because the Dorau--Much identification ties the sign of horizon area change to a relative entropy that is non-negative by construction, the entropic framework constrains this instability, and we propose relative-entropy flow on the perturbed horizon as a diagnostic distinguishing the branches. The instability also threatens the rigid Killing horizon on which the modular machinery is erected; Section~\ref{sec:timescales} meets this with a quantitative separation of timescales, with the horizon entropy itself as hierarchy parameter.
+
+The Dorau--Much quantity \eqref{eq:DM-pivot} is not a von Neumann entropy of a hidden substrate; it is a \emph{relative} entropy, the information-theoretic distinguishability of the realized state $\omega_\phi$ from the counterfactual vacuum $\omega_0$. It measures, in the only sense the algebraic theory makes available, how
+much the world that happened differs from the world that did not.
+
+
+% ====================================================================
+\section{The \Nariai{} Geometry and its Bifurcate Killing Horizon}
+\label{sec:geometry}
+
+\subsection{The Schwarzschild--de Sitter family and its degenerate limit}
+
+The Schwarzschild--de Sitter (SdS) family in four dimensions,
+\begin{equation}
+ds^2 = -f(r)\,dt^2 + \frac{dr^2}{f(r)} + r^2\, d\Omega^2,
+\qquad
+f(r) = 1 - \frac{2M}{r} - \frac{\Lambda r^2}{3},
+\label{eq:SdS}
+\end{equation}
+possesses, for $0 < 9\Lambda M^2 < 1$, two positive roots of $f$: the black-hole horizon $r_b$ and the cosmological horizon $r_c > r_b$. Their surface gravities,
+\begin{equation}
+\kappa_{b,c} = \tfrac{1}{2}\,|f'(r_{b,c})|,
+\end{equation}
+are unequal for any nondegenerate member of the family. This inequality is why generic SdS is a poor arena for the algebraic construction of Ref.~\cite{DorauMuch}: the two horizons define inequivalent notions of thermal equilibrium, no globally regular Killing-invariant Hadamard state exists on the full extension (the obstruction identified by Kay and Wald~\cite{KayWald}), and any horizon-by-horizon treatment inherits an ambiguity in the reference state --- an ambiguity that the common remedy of partitioning SdS by timelike boundaries \cite{Rusalev} makes explicit rather than removes.
+
+The degenerate limit removes the obstruction. As $9\Lambda M^2 \to 1$ the two roots merge at
+\begin{equation}
+r_b, r_c \;\to\; r_\star = \frac{1}{\sqrt{\Lambda}} = 3M,
+\end{equation}
+and the region between the horizons acquires a finite invariant description. Following the Ginsparg--Perry procedure~\cite{GinspargPerry}, set
+\begin{equation}
+9\Lambda M^2 = 1 - 3\varepsilon^2, \qquad 0 \le \varepsilon \ll 1,
+\end{equation}
+and introduce coordinates $(\psi, \chi)$ adapted to the near-degenerate throat,
+\begin{equation}
+t = \frac{\psi}{\varepsilon\sqrt{\Lambda}},
+\qquad
+r = \frac{1}{\sqrt{\Lambda}}\left(1 - \varepsilon\cos\chi \right) + \mathcal{O}(\varepsilon^2).
+\end{equation}
+In the limit $\varepsilon \to 0$ the metric \eqref{eq:SdS} becomes the \Nariai{} spacetime~\cite{Nariai}
+\begin{equation}
+ds^2 = \frac{1}{\Lambda}\left(-\sin^2\!\chi \, d\psi^2 + d\chi^2\right) + \frac{1}{\Lambda}\, d\Omega^2 ,
+\label{eq:nariai-global}
+\end{equation}
+the direct product $dS_2 \times S^2$ of a two-dimensional de~Sitter factor and a round two-sphere, both of curvature radius $1/\sqrt{\Lambda}$. Unlike the near-horizon limits of asymptotically flat extremal black holes, \eqref{eq:nariai-global} is an exact solution of the Einstein equations with cosmological constant $\Lambda$, and it is the \emph{unique} member of the SdS family admitting a global bifurcate Killing horizon with a single surface gravity.
+
+\subsection{Static patch, horizon structure, and the normalization of the Killing field}
+
+Substituting $\rho = \Lambda^{-1/2}\cos\chi$ and $\tau = \Lambda^{-1/2}\psi$ brings the $dS_2$ factor to static form,
+\begin{equation}
+ds^2 = -\big(1-\Lambda\rho^2\big)\,d\tau^2 + \frac{d\rho^2}{1-\Lambda\rho^2} + \frac{1}{\Lambda}\,d\Omega^2 ,
+\label{eq:nariai-static}
+\end{equation}
+with Killing field $\xi = \partial_\tau$ and Killing horizons at $\rho = \pm \Lambda^{-1/2}$. The surface gravity of $\xi$ is
+\begin{equation}
+\kappa = \sqrt{\Lambda}\,,
+\qquad
+T = \frac{\kappa}{2\pi} = \frac{\sqrt{\Lambda}}{2\pi}\,,
+\label{eq:temperature}
+\end{equation}
+which is the Bousso--Hawking temperature of the degenerate solution~\cite{BoussoHawking}. Two remarks on normalization are essential, because this is the hinge on which the modular theory of Section~\ref{sec:algebra} turns. First, the limit must be taken in the rescaled time $\psi$, not in the SdS time $t$: the surface gravities $\kappa_{b,c}$ of the parent family both vanish as $\varepsilon \to 0$, and a construction anchored to $\partial_t$ would see zero temperature. The rescaling $t = \psi/(\varepsilon\sqrt{\Lambda})$ is the Bousso--Hawking prescription of normalizing the generator with respect to the inertial observer suspended between the horizons. Second --- and this is where \Nariai{} improves on the Rindler wedge --- the normalization is \emph{not} ambiguous. The Rindler boost generator admits arbitrary rescaling, correspondingly rescaling the Unruh temperature, a freedom Ref.~\cite{DorauMuch} notes as an intrinsic limitation of the local construction. On \Nariai{} the geometry itself supplies the scale: the Killing field in \eqref{eq:nariai-static} is fixed (up to sign) by unit normalization on the central geodesic $\rho = 0$, and the temperature \eqref{eq:temperature} is an invariant of the solution.
+
+With $\rho_*$ the tortoise coordinate of \eqref{eq:nariai-static} and $u,v = \tau \mp \rho_*$, the affine (Kruskal-type) coordinates
+\begin{equation}
+U = -\frac{1}{\kappa}\,e^{-\kappa u},
+\qquad
+V = +\frac{1}{\kappa}\,e^{+\kappa v},
+\end{equation}
+extend the static patch to the full square Penrose diagram of $dS_2$, every point of which carries the sphere $S^2_{1/\sqrt{\Lambda}}$. The global null hypersurfaces $\mathcal{H}_B = \{V = 0\}$ and $\mathcal{H}_A = \{U = 0\}$, generated by the flow of $\xi$, intersect on the bifurcation surface
+\begin{equation}
+\mathcal{S} = S^2_{1/\sqrt{\Lambda}},
+\qquad
+A(\mathcal{S}) = \frac{4\pi}{\Lambda}\,,
+\label{eq:area}
+\end{equation}
+a \emph{compact} two-sphere. The pair $(\mathcal{H}_A, \mathcal{H}_B)$ is a bifurcate Killing horizon in the exact sense of Kay and Wald~\cite{KayWald}, realized globally rather than as a local approximation, with cross-sectional volume element $d\mathrm{vol}_{\mathcal{S}} = \Lambda^{-1}\sin\theta\, d\theta\, d\varphi$ integrating to the finite total \eqref{eq:area}. Every transverse integral in Sections~\ref{sec:algebra} and~\ref{sec:entropy} is therefore finite from the outset, and the associated horizon entropy
+\begin{equation}
+S_{\mathrm{N}} = \frac{A(\mathcal{S})}{4} = \frac{\pi}{\Lambda}
+\label{eq:Smax}
+\end{equation}
+is not only finite but extremal: it saturates the maximal horizon entropy attainable within the SdS family at fixed $\Lambda$. The \Nariai{} horizon is, in this precise sense, the largest ledger de~Sitter space affords.
+
+\subsection{Global hyperbolicity and the Euclidean section}
+
+Two further structural facts prepare the ground. First, $dS_2 \times S^2$ is globally hyperbolic (a product of globally hyperbolic $dS_2$ with a compact Riemannian factor), so the algebraic quantization of a Klein--Gordon field proceeds without the causal subtleties of generic SdS. Second, the Euclidean section obtained by $\psi \to -i\psi_E$ is the round product $S^2 \times S^2$, compact and everywhere regular, with thermal periodicity $\psi_E \sim \psi_E + 2\pi$ built into the geometry. There is consequently a distinguished Hartle--Hawking-type state $\omega_0$: obtained by analytic continuation from the regular Euclidean section, invariant under the Killing flow, Hadamard, and KMS at the temperature \eqref{eq:temperature}. For nondegenerate SdS no such globally regular equilibrium state exists --- the two unequal temperatures forbid it --- so the degeneracy of \Nariai{} is not a curiosity we tolerate but the very feature that makes a preferred global vacuum available. It is this $\omega_0$ that plays the role of the reference state: the ``unrealized'' side of the relative entropy.
+
+\subsection{Vacuum polarization, the Ginsparg--Perry instability, and KMS}
+\label{sec:timescales}
+
+Modular theory, and with it the Araki--Uhlmann relative entropy, presupposes a fixed bifurcate Killing horizon carrying an invariant KMS state $\omega_0$. But the \Nariai{} background is not inert: it is the unstable saddle governing the semiclassical decay of de~Sitter space \cite{GinspargPerry}, and one-loop vacuum polarization drives the degenerate geometry off the extremal point along the (anti-)evaporation branches \cite{BoussoHawking}. If the background is deformed by the very fields whose modular structure we exploit, in what sense is a \emph{static} modular Hamiltonian available? Treating the instability as a predictive bonus (Section~\ref{sec:instability}) while silently assuming a rigid background elsewhere would be inconsistent. The resolution is a separation of timescales, made quantitative on \Nariai{} because the hierarchy parameter turns out to be the horizon entropy itself.
+
+Three timescales are in play. The first is the modular (thermal) time: one period of Euclidean periodicity, or equivalently the light-crossing time of the throat,
+\begin{equation}
+t_{\mathrm{mod}} \;=\; \beta \;=\; \frac{2\pi}{\kappa} \;=\; \frac{2\pi}{\sqrt{\Lambda}}\,.
+\label{eq:t-mod}
+\end{equation}
+This is the timescale on which the modular flow \eqref{eq:dilations} acts, on which the KMS condition is formulated, and on which the horizon data of a localized excitation live. The second is the classical evolution timescale of the branch parameter $\varepsilon$ --- and here the first structural point enters: \emph{there is none}. Within classical general relativity, $\varepsilon$ labels a one-parameter family of exactly static solutions \eqref{eq:SdS}; the degenerate point sits on a flat direction, not a classical instability. The \Nariai{} instability is an $\mathcal{O}(\hbar)$ effect from the start, sourced entirely by the renormalized stress tensor fed back through the semiclassical Einstein equations. The third timescale is therefore the backreaction time. Dimensionally, a Hadamard state on a background of curvature radius $r_\star = 1/\sqrt{\Lambda}$ has $\langle T_{ab}\rangle_{\mathrm{ren}} \sim \hbar\,\Lambda^2$ per field species; inserted into $G_{ab} + \Lambda g_{ab} = 8\pi G\, \langle T_{ab}\rangle_{\mathrm{ren}}$, it drives the dimensionless perturbation at a rate
+\begin{equation}
+\Gamma \;\sim\; \underbrace{\kappa}_{\substack{\text{modular}\\ \text{frequency}}} \cdot \underbrace{\big(G\hbar\,\Lambda\big)}_{\substack{\text{semiclassical}\\ \text{parameter } \ell_P^2/r_\star^2}}
+\;=\; \frac{\pi\,\kappa}{S_{\mathrm{N}}}\,,
+\qquad
+S_{\mathrm{N}} = \frac{\pi}{G\hbar\,\Lambda}\,,
+\label{eq:Gamma}
+\end{equation}
+which is the parametric content of the Bousso--Hawking analysis \cite{BoussoHawking}: the perturbation $\varepsilon$ grows (or decays) on a timescale longer than the modular time by a factor of order the horizon entropy,
+\begin{equation}
+\frac{t_{\mathrm{inst}}}{t_{\mathrm{mod}}} \;\sim\; \frac{S_{\mathrm{N}}}{\pi} \;\gg\; 1\,.
+\label{eq:hierarchy}
+\end{equation}
+The nucleation channel is suppressed more strongly still: the Ginsparg--Perry decay of de~Sitter proceeds through the $S^2 \times S^2$ instanton --- the Euclidean section of Section~\ref{sec:geometry} itself --- at a rate $\propto e^{-(I_{\mathrm{N}} - I_{dS})} = e^{-S_{\mathrm{N}}}$ \cite{GinspargPerry}. For any macroscopic value of the cosmological constant $S_{\mathrm{N}}$ is enormous (of order $10^{122}$ for the observed $\Lambda$), and the hierarchy \eqref{eq:hierarchy} is not merely large but the largest in physics.
+
+The consequences for the modular construction are:
+
+\emph{(a) Order counting.} Sections~\ref{sec:algebra} and \ref{sec:entropy} are exact statements about the fixed background --- the zeroth-order term in an expansion in $G\hbar\Lambda = \pi/S_{\mathrm{N}}$; the instability and the area response \eqref{eq:perturbation} are first-order in the same parameter. Using zeroth-order modular data inside a first-order response equation is the standard, and only consistent, semiclassical truncation --- the same one implicit in Refs.~\cite{Jacobson,DorauMuch}; corrections from the drifting background are $\mathcal{O}(1/S_{\mathrm{N}})$, the order of loop corrections already discarded in writing semiclassical gravity at all.
+
+\emph{(b) Kinematic rigidity.} The entropy formula depends on the background through exactly two structures: the Kay--Wald scaling-limit kernel \eqref{eq:scaling-limit}, universal and hence blind to a slow drift; and the transverse measure $d\mathrm{vol}_{\mathcal{S}}$, which drifts fractionally by $\mathcal{O}(\kappa\,\Delta u / S_{\mathrm{N}})$ over the boost-time support $\Delta u$ of an excitation.
+
+\emph{(c) The quasi-equilibrium window.} For any excitation with modular support $\kappa\,\Delta u \ll S_{\mathrm{N}}$ --- satisfied with $\sim 120$ orders of magnitude to spare by anything localized --- the KMS state, the modular flow, and the relative entropy \eqref{eq:Srel-nariai} are valid up to relative corrections of order $1/S_{\mathrm{N}}$; the modular theory of this paper is the theory of that window, before accumulated backreaction ruptures the degenerate structure at $t \sim S_{\mathrm{N}}\,\beta$.
+
+Two remarks. The hierarchy is not imposed but \emph{self-generated}: a single coherent excitation shifts the area fractionally by $\delta A/A = (\Lambda/\pi)\,\Srel$ in Planck units (Section~\ref{sec:entropy}) --- $\mathcal{O}(1/S_{\mathrm{N}})$ per nat --- so the rate at which the equilibrium description degrades is the rate at which the framework's own first-order output accumulates: the theory predicts the size of its domain of validity, Eq.~\eqref{eq:hierarchy}. Conversely, at times $\sim S_{\mathrm{N}}\beta$, or near the branch endpoints, no static modular Hamiltonian exists and the present framework makes no claim; what replaces it is the dynamical problem of item~(iii) of Section~\ref{app:remains}.
+
+\section{Horizon Algebra and Modular Structure on \Nariai{}}
+\label{sec:algebra}
+
+\subsection{Field content and dimensional reduction}
+
+Let $\Phi$ be a real, minimally coupled Klein--Gordon field of mass $m$ on $dS_2 \times S^2$. The product structure separates the wave operator,
+\begin{equation}
+\square_g = \square_{dS_2} + \Lambda\, \Delta_{S^2},
+\end{equation}
+so expanding in spherical harmonics, $\Phi = \sum_{\ell m} \varphi_{\ell m}(\psi,\chi)\, Y_{\ell m}(\theta,\varphi)$, reduces the theory to an infinite tower of two-dimensional fields $\varphi_{\ell m}$ on $dS_2$ with effective masses
+\begin{equation}
+m_\ell^2 = \underbrace{m^2}_{\text{bare mass}} + \underbrace{\Lambda\,\ell(\ell+1)}_{\substack{\text{Kaluza--Klein mass}\\ \text{from the compact } S^2}}, \qquad \ell = 0, 1, 2, \dots
+\label{eq:tower}
+\end{equation}
+The scaling limit below is insensitive to the tower, but \eqref{eq:tower} does two jobs. It exhibits the compactness of $\mathcal{S}$ as a physical regulator --- the transverse degrees of freedom are a discrete tower rather than a continuum, which is ultimately why the entropy integrals of Section~\ref{sec:entropy} converge without subtraction --- and it explains \emph{why} the $s$-wave sector $\ell = 0$ dominates near-horizon physics. On the $dS_2$ factor, of Hubble rate $\sqrt{\Lambda}$, every $\ell \ge 1$ member of \eqref{eq:tower} is a heavy, principal-series field, $m_\ell^2/\Lambda \ge 2 > \tfrac{1}{4}$, with $\nu_\ell = \sqrt{\ell(\ell+1) + m^2/\Lambda - \tfrac{1}{4}}$; its static-patch correlators decay rapidly and its thermal excitation is Boltzmann-suppressed as $e^{-\pi\nu_\ell} \sim e^{-\pi\ell}$. Each successive harmonic decouples exponentially from the near-horizon dynamics, so the restriction of the slow dynamics to the transversally homogeneous mode --- relied upon throughout Sections~\ref{sec:timescales} and~\ref{sec:instability} --- is enforced by the reduced mass spectrum itself: the compact sphere regulates both the entropy sums and the mode content of the instability.
+
+\subsection{The scaling-limit two-point function on a compact horizon}
+
+By the Kay--Wald analysis~\cite{KayWald}, the restriction of any Killing-flow-invariant Hadamard state to $\mathcal{H}_B$ possesses the universal scaling-limit two-point function; on \Nariai{} it takes exactly the form of Ref.~\cite{DorauMuch},
+\begin{equation}
+\Lambda_2(\phi, \psi)
+= -\frac{1}{\pi} \int
+\frac{\phi(U, s)\, \psi(U', s)}{(U - U' - i0^+)^2}\;
+dU\, dU'\, d\mathrm{vol}_{\mathcal{S}},
+\label{eq:scaling-limit}
+\end{equation}
+for $\phi, \psi \in C^\infty_c(\mathcal{H}_B)$, where now $s = (\theta,\varphi)$ ranges over the \emph{compact} bifurcation sphere and $d\mathrm{vol}_{\mathcal{S}} = \Lambda^{-1} \sin\theta\, d\theta\, d\varphi$. Three properties deserve emphasis.
+
+\begin{enumerate}
+\item \emph{Universality survives compactification.} The kernel in $U$ is the same conformal kernel as in the Rindler and Schwarzschild cases: the scaling limit forgets the mass tower \eqref{eq:tower} and the $dS_2$ curvature, retaining only the null-line conformal structure and the transverse measure. The horizon theory is effectively a chiral theory in $U$ fibered over $\mathcal{S}$ --- but the fiber integral is now finite.
+
+\item \emph{The reference state is canonical.} On the Rindler horizon the state whose restriction yields \eqref{eq:scaling-limit} is the Minkowski vacuum; on \Nariai{} it is the Euclidean state $\omega_0$ of Section~\ref{sec:geometry}, distinguished by regularity on $S^2\times S^2$ and KMS at $\beta = 2\pi/\sqrt{\Lambda}$ with respect to the projected Killing flow.
+
+\item \emph{The symplectic structure is finite.} The imaginary part of \eqref{eq:scaling-limit} equips $C^\infty_c(\mathcal{H}_B^{\mathcal{R}})$ with the symplectic form
+\begin{equation}
+\sigma(\phi,\psi)
+= \int \big(\phi\,\partial_U \psi - \psi\,\partial_U \phi\big)\, dU\, d\mathrm{vol}_{\mathcal{S}},
+\label{eq:symplectic}
+\end{equation}
+finite, by compactness of $\mathcal{S}$, even for data merely bounded in the transverse directions --- in particular for the homogeneous ($\ell = 0$) perturbations relevant to the instability, which on the Rindler horizon are not admissible test data. This enlargement of the admissible perturbation space is what gives Section~\ref{sec:instability} its content.
+
+\end{enumerate}
+
+
+\subsection{Weyl algebra, modular dilations, and the KMS structure}
+
+The horizon von Neumann algebra now proceeds verbatim along Ref.~\cite{DorauMuch} and the modular analysis of Summers and Verch~\cite{SummersVerch}. Over $\big(C_c^\infty(\mathcal{H}_B^{\mathcal{R}}), \sigma\big)$ one builds the Weyl algebra $\mathscr{W}_{\mathcal{R}}$, generated by unitaries $W(\phi)$ satisfying
+\begin{equation}
+W(\phi)^\dagger = W(-\phi),
+\qquad
+W(\phi) W(\psi) = e^{-\frac{i}{2}\sigma(\phi,\psi)}\, W(\phi+\psi),
+\end{equation}
+represents it in the GNS representation $(\mathscr{H}_0, \pi_0, \Omega_0)$ of the quasifree state
+\begin{equation}
+\omega_0\big(W(\psi)\big) = e^{-\frac{1}{2}\Lambda_2(\psi,\psi)},
+\end{equation}
+and takes the double commutant $\mathscr{N}_{\mathcal{R}} = \pi_0(\mathscr{W}_{\mathcal{R}})''$. The vector $\Omega_0$ is cyclic and separating for $\mathscr{N}_{\mathcal{R}}$, and the associated Tomita--Takesaki modular group acts geometrically as affine dilations of the horizon generators,
+\begin{equation}
+\Delta_{\mathcal{R}}^{it} = \mathfrak{D}_{-2\pi t}:
+\qquad
+\phi(U, s) \;\longmapsto\; \phi\big(e^{-2\pi t}\, U,\; s\big),
+\label{eq:dilations}
+\end{equation}
+leaving the compact transverse coordinate $s$ untouched; the orientation of the flow (contraction of $\mathcal{H}_B^{\mathcal{R}}$, where $U<0$, toward the bifurcation surface as $t \to +\infty$) is fixed by the KMS condition for $\omega_0$ and is the orientation that renders the relative entropy non-negative. This is the Bisognano--Wichmann property in its bifurcate-horizon generalization: it delivers, as a theorem rather than an input, the identification of the geometric Killing flow with the modular flow of $(\mathscr{N}_{\mathcal{R}}, \Omega_0)$ at the Bousso--Hawking temperature \eqref{eq:temperature}.
+
+\subsection{The modular Hamiltonian in explicit form}
+\label{sec:modularH}
+
+For the computations of Section~\ref{sec:entropy} it is worth descending to explicit formulas. Differentiating \eqref{eq:dilations} at $t=0$, the generator $K = -\ln \Delta_{\mathcal{R}}$ acts on horizon data as $2\pi\, U \partial_U$, and its second-quantized form on the full horizon is the modular-weighted flux operator
+\begin{equation}
+K \;=\; -\ln \Delta_{\mathcal{R}}
+\;=\; \underbrace{2\pi \int_{\mathcal{S}} d\mathrm{vol}_{\mathcal{S}} \int_{-\infty}^{0} (-U)\, {:}T_{UU}(U,s){:}\; dU}_{\displaystyle K_{\mathcal{R}}\;(\text{right-portion boost energy})}
+\;-\;
+\underbrace{2\pi \int_{\mathcal{S}} d\mathrm{vol}_{\mathcal{S}} \int_{0}^{\infty} U\, {:}T_{UU}(U,s){:}\; dU}_{\displaystyle K_{\mathcal{L}}\;(\text{left portion})}\,,
+\label{eq:modularH}
+\end{equation}
+with $K_{\mathcal{R}}$ affiliated to $\mathscr{N}_{\mathcal{R}}$ and generating the dilations \eqref{eq:dilations} on $\mathcal{H}_B^{\mathcal{R}}$. Both integrals are individually finite in expectation on Hadamard excitations of $\omega_0$: the modular weight $|U|$ vanishes linearly at the bifurcation surface while the normal-ordered flux is integrable along the generators, and the transverse integral is bounded by the total area \eqref{eq:area}. On the Rindler horizon the same expression exists only as a formal density in the transverse plane; on \Nariai{} it is an honest (unbounded, self-adjoint) operator expression with finite state-dependent expectation values.
+
+Equation \eqref{eq:modularH} is the null-coordinate face of the modular Hamiltonian. Its static face follows from the Bisognano--Wichmann identification: $K_{\mathcal{R}} = \beta\, H_\xi$ with $\beta = 2\pi/\sqrt{\Lambda}$, where $H_\xi$ is the Killing energy on a static slice $\Sigma_\tau$ of \eqref{eq:nariai-static}. With $\sqrt{h}\, d\rho\, d\Omega = (1-\Lambda\rho^2)^{-1/2}\, \Lambda^{-1} \sin\theta\, d\rho\, d\theta\, d\varphi$ and $n^a = (1-\Lambda\rho^2)^{-1/2}\, \delta^a_{\;\tau}$,
+\begin{equation}
+K_{\mathcal{R}} \;=\; \frac{2\pi}{\sqrt{\Lambda}}\; H_\xi\,,
+\qquad
+H_\xi
+= \int_{\Sigma_\tau} T_{ab}\, \xi^a n^b\, d\Sigma
+= \frac{1}{\Lambda} \int_{S^2} d\Omega \int_{-1/\sqrt{\Lambda}}^{\,1/\sqrt{\Lambda}}
+\frac{{:}T_{\tau\tau}(\rho, s){:}}{1 - \Lambda \rho^2}\; d\rho\,,
+\label{eq:KillingH}
+\end{equation}
+the energy flux integrated across the full throat, between the two poles of the degenerate horizon. The apparent divergence of the measure at $\rho \to \pm 1/\sqrt{\Lambda}$ is compensated for Hadamard states by $T_{\tau\tau} \propto (1-\Lambda\rho^2)$; and because the geometry fixes the normalization of $\xi$ (Section~\ref{sec:geometry}), the Killing energy \eqref{eq:KillingH} carries no rescaling ambiguity. The two faces \eqref{eq:modularH} and \eqref{eq:KillingH} are related on-shell by deforming $\Sigma_\tau$ to the horizon; the Jacobian identity \eqref{eq:jacobian-identity} of Section~\ref{app:numerics} is precisely this deformation in coordinates. For wedge-local excitations --- coherent states now, squeezed states in Section~\ref{app:squeezed} --- the sum rule \eqref{eq:sumrule} with $\Delta S = 0$ reduces the Araki--Uhlmann relative entropy to the expectation-value shift of \eqref{eq:modularH},
+\begin{equation}
+\Srel(\omega_0\,\|\,\omega) \;=\; \langle K_{\mathcal{R}} \rangle_{\omega} - \langle K_{\mathcal{R}} \rangle_{\omega_0}\,,
+\label{eq:Srel-K}
+\end{equation}
+which is the form in which the explicit computations below will be organized.
+
+Coherent excitations are defined as in the flat case: for $\phi \in C_c^\infty(\mathcal{H}_B^{\mathcal{R}})$,
+\begin{equation}
+\omega_\phi\big(W(\psi)\big) = \omega_0\big(W(\phi)^\dagger\, W(\psi)\, W(\phi)\big),
+\qquad
+\Omega_\phi = e^{i\Phi(\phi)}\,\Omega_0 .
+\label{eq:coherent}
+\end{equation}
+Physically, $\omega_\phi$ describes the \Nariai{} equilibrium disturbed by a classical pulse of scalar radiation crossing the horizon --- the minimal ``event'' against the background of the eventless vacuum. With the algebra, the modular geometry \eqref{eq:dilations}, and the state pair $(\omega_0, \omega_\phi)$ in hand, every ingredient of the relative-entropy computation is assembled and finite.
+
+\section{Relative Entropy and the Finite-Area Identification}
+\label{sec:entropy}
+
+\subsection{The relative entropy of a coherent excitation}
+
+The Araki--Uhlmann relative entropy of the pair \eqref{eq:coherent} is computed from the modular data by Araki's formula
+\begin{equation}
+\Srel(\omega_0\,\|\,\omega_\phi)
+= i\,\frac{d}{dt}\Big|_{t=0} \big\langle \Omega_\phi \,\big|\, \Delta_{\mathcal{R}}^{it}\, \Omega_\phi \big\rangle .
+\label{eq:araki-formula}
+\end{equation}
+We display the intermediate steps, since it is here that the finiteness claims of Section~\ref{sec:algebra} are cashed out. Because $\Delta^{it}_{\mathcal{R}} \Omega_0 = \Omega_0$ and the modular flow acts geometrically by \eqref{eq:dilations}, the vector $\Delta_{\mathcal{R}}^{it}\Omega_\phi$ is again coherent, $\Delta_{\mathcal{R}}^{it} \Omega_\phi = W(\phi^t)\,\Omega_0$ with $\phi^t(U,s) = \phi(e^{-2\pi t} U, s)$, and the overlap of two coherent vectors follows from the Weyl relations and the quasifree form of $\omega_0$:
+\begin{equation}
+\big\langle \Omega_\phi \,\big|\, \Delta_{\mathcal{R}}^{it}\, \Omega_\phi \big\rangle
+= \big\langle W(\phi)\Omega_0 \,\big|\, W(\phi^t)\Omega_0 \big\rangle
+= \exp\!\Big[ \tfrac{i}{2}\,\sigma(\phi, \phi^t) \;-\; \tfrac{1}{2}\, \Lambda_2\big(\phi^t - \phi,\; \phi^t - \phi\big) \Big].
+\label{eq:overlap}
+\end{equation}
+Since $\phi^t - \phi = \mathcal{O}(t)$, the Gaussian damping is $\mathcal{O}(t^2)$ and drops out of the first derivative; only the symplectic phase survives:
+\begin{equation}
+\Srel(\omega_0\,\|\,\omega_\phi)
+= i \cdot \frac{i}{2}\,\sigma\big(\phi,\, \delta\phi\big)
+= \frac{1}{2}\,\sigma\big(\delta\phi,\, \phi\big),
+\qquad
+\delta\phi \equiv \frac{d}{dt}\Big|_{t=0} \phi^t = -2\pi\, U\, \partial_U \phi\,.
+\label{eq:Srel-symplectic}
+\end{equation}
+Evaluating the symplectic form \eqref{eq:symplectic} on the pair $(\delta\phi, \phi)$ and integrating by parts along the generators,
+\begin{align}
+\sigma\big(\delta\phi, \phi\big)
+&= -2\pi \int \Big[\, U\,\partial_U\phi \,\partial_U \phi \;-\; \phi\, \partial_U\big(U \partial_U \phi\big) \Big]\, dU\, d\mathrm{vol}_{\mathcal{S}}
+\nonumber\\[2pt]
+&= -2\pi \int \Big[\, U\,(\partial_U\phi)^2 \;-\; \phi\,\partial_U\phi \;-\; \phi\, U\, \partial_U^2 \phi \Big]\, dU\, d\mathrm{vol}_{\mathcal{S}}
+\nonumber\\[2pt]
+&= -4\pi \int U\,(\partial_U\phi)^2 \, dU\, d\mathrm{vol}_{\mathcal{S}}\,,
+\label{eq:byparts}
+\end{align}
+where in the last step $\int \phi\,\partial_U\phi\, dU = \tfrac{1}{2}[\phi^2] = 0$ and $\int \phi\, U \partial_U^2\phi\, dU = -\int U (\partial_U\phi)^2\, dU$, all boundary terms vanishing for data compactly supported along the generators. Every step is unconditionally justified, the transverse integral being finite \emph{term by term} by compactness of $\mathcal{S}$; on the Rindler horizon the same manipulations additionally require compact support in the transverse plane --- exactly the restriction that excludes the homogeneous modes of Section~\ref{sec:instability}. Combining \eqref{eq:Srel-symplectic} and \eqref{eq:byparts} yields, exactly as in the flat construction,
+\begin{equation}
+\boxed{\;
+\Srel(\omega_0\,\|\,\omega_\phi)
+= -2\pi \int_{\mathcal{H}_B^{\mathcal{R}}} U\, \big(\partial_U \phi\big)^2 \; dU\; d\mathrm{vol}_{\mathcal{S}}
+\;}
+\label{eq:Srel-nariai}
+\end{equation}
+which is manifestly non-negative on $\mathcal{H}_B^{\mathcal{R}}$ (where $U < 0$) and now manifestly \emph{finite}: the $U$-integral converges for compactly supported data as before, while the transverse integral is bounded by the total area $4\pi/\Lambda$. Identifying $(\partial_U\phi)^2 = \langle{:}T_{ab}{:}\rangle_{\omega_\phi}\,\xi^a\xi^b$ through the normal-ordered stress tensor in the coherent state --- the Weyl-shift computation transfers unchanged --- gives the pivot identity on \Nariai{}:
+\begin{equation}
+\Srel(\omega_0\,\|\,\omega_\phi)
+= -2\pi \int_{\mathcal{H}_B^{\mathcal{R}}} \underbrace{U\vphantom{\big(}}_{\substack{\text{modular}\\ \text{weight}}}\, \underbrace{\langle{:}T_{ab}{:}\rangle_{\omega_\phi}\, \xi^a \xi^b}_{\text{boost-energy flux}} \; dU\; \underbrace{d\mathrm{vol}_{\mathcal{S}}}_{\substack{\text{finite transverse}\\ \text{measure, total } 4\pi/\Lambda}}
+= 2\pi\, \delta Q,
+\label{eq:pivot-nariai}
+\end{equation}
+the boost-energy flux of the excitation through the future horizon, measured along the canonically normalized Killing flow of Section~\ref{sec:geometry}. Because that normalization is fixed by the geometry, $\delta Q$ and $\Srel$ are separately unambiguous. Equivalently, by \eqref{eq:Srel-K}, \eqref{eq:pivot-nariai} is the statement $\Srel = \Delta\langle K_{\mathcal{R}}\rangle$ with \eqref{eq:modularH} evaluated on the coherent flux $\langle{:}T_{UU}{:}\rangle_{\omega_\phi} = (\partial_U\phi)^2$.
+
+\subsection{Explicit factorization of the transverse sphere}
+\label{sec:factorization}
+
+The compactness of the bifurcation surface can now be exhibited in the entropy formula itself. Expand the horizon data in real spherical harmonics on $\mathcal{S}$,
+\begin{equation}
+\phi(U, s) = \sum_{\ell = 0}^{\infty} \sum_{m = -\ell}^{\ell} \phi_{\ell m}(U)\; Y_{\ell m}(\theta, \varphi),
+\qquad
+\int_{S^2} Y_{\ell m}\, Y_{\ell' m'}\; d\Omega = \delta_{\ell \ell'}\, \delta_{m m'},
+\end{equation}
+and use $d\mathrm{vol}_{\mathcal{S}} = \Lambda^{-1}\, d\Omega$ in \eqref{eq:Srel-nariai}. The dilation kernel acts only along the generators, so the harmonic label is inert under the modular flow, the cross terms integrate to zero by orthonormality, and the relative entropy factorizes exactly:
+\begin{equation}
+\boxed{\;
+\Srel(\omega_0\,\|\,\omega_\phi)
+\;=\; \frac{2\pi}{\Lambda} \sum_{\ell = 0}^{\infty} \sum_{m=-\ell}^{\ell}
+\int_{-\infty}^{0} (-U)\, \big(\partial_U \phi_{\ell m}(U)\big)^2 \; dU
+\;}
+\label{eq:factorized}
+\end{equation}
+Three features of \eqref{eq:factorized} carry the argument of this paper. First, the transverse geometry enters through exactly two elements --- the discreteness of the sum and the prefactor $\Lambda^{-1} = A(\mathcal{S})/4\pi$ --- while the modular kernel is $\ell$-blind: the mass tower \eqref{eq:tower}, the $dS_2$ curvature, and the harmonic index have all dropped out of the longitudinal integrand. Second, each summand is precisely the per-generator relative entropy of the Dorau--Much Rindler construction: the \Nariai{} entropy is an \emph{area-weighted countable sum} of Rindler entropies, where on the Rindler horizon the corresponding object is a divergent continuum integral $\int d^2 x_\perp$; convergence of \eqref{eq:factorized} for smooth data is guaranteed by the rapid decay of harmonic coefficients. Third, the $\ell = 0$ term is a perfectly good, finite summand: the transversally homogeneous perturbations on which Section~\ref{sec:instability} operates contribute
+\begin{equation}
+\Srel\big|_{\ell = 0}
+= \frac{2\pi}{\Lambda} \int_{-\infty}^{0} (-U)\, \big(\partial_U \phi_{00}\big)^2\, dU\,,
+\label{eq:swave-entropy}
+\end{equation}
+whereas on the Rindler horizon a transversally homogeneous mode has strictly infinite relative entropy and is excluded from the admissible data.
+
+\subsection{A closed-form example}
+\label{sec:example}
+
+To make the construction fully concrete, we evaluate \eqref{eq:factorized} in closed form for an explicit family of excitations. Work in Planck units ($G = \hbar = c = 1$), take the excitation transversally homogeneous ($s$-wave, the sector of the instability), and choose the one-parameter family of horizon profiles
+\begin{equation}
+\phi_n(U, s) \;=\; a\,\big(\!-\kappa U\big)^{n}\, e^{\kappa U},
+\qquad U \in (-\infty, 0],
+\quad n = 1, 2, \dots,
+\quad \kappa = \sqrt{\Lambda},
+\label{eq:example-profile}
+\end{equation}
+smooth on the horizon, vanishing at the bifurcation surface as $(-U)^n$, decaying exponentially in affine parameter toward the past, with amplitude $a$ (mass dimension one). In boost time $u = -\kappa^{-1}\ln(-\kappa U)$ this is a localized pulse of width $\kappa\,\Delta u = \mathcal{O}(1)$: a single-modular-period event, sitting inside the quasi-equilibrium window of Section~\ref{sec:timescales} with $\sim S_{\mathrm{N}}$ to spare. Substituting $x = -\kappa U$,
+\begin{equation}
+\partial_U \phi_n = -a\,\kappa\, x^{\,n-1}\,(n - x)\, e^{-x},
+\qquad
+\int_{-\infty}^{0} (-U)\,\big(\partial_U \phi_n\big)^2\, dU
+= a^2 \int_0^\infty x^{\,2n-1}\, (n - x)^2\, e^{-2x}\, dx\,,
+\end{equation}
+and the integral is elementary:
+\begin{equation}
+\int_0^\infty x^{\,2n-1} (n-x)^2\, e^{-2x}\, dx
+= \frac{\Gamma(2n)}{4^{\,n}}\cdot \frac{n}{2}
+= \frac{n\,(2n-1)!}{2 \cdot 4^{\,n}}\,.
+\end{equation}
+The relative entropy of the excitation is therefore, from \eqref{eq:Srel-nariai} with the full transverse volume $A(\mathcal{S}) = 4\pi/\Lambda$,
+\begin{equation}
+\boxed{\;
+\Srel(\omega_0\,\|\,\omega_{\phi_n})
+= \frac{4\pi^2 a^2}{\Lambda}\cdot \frac{n\,(2n-1)!}{4^{\,n}}
+\;\;\xrightarrow[\;n=1\;]{}\;\;
+\frac{\pi^2 a^2}{\Lambda}
+\;}
+\label{eq:example-Srel}
+\end{equation}
+finite, manifestly positive, and expressed entirely in terms of the amplitude and the cosmological constant --- no regulator, no subtraction, no transverse cutoff. The remaining dictionary entries follow at once for $n = 1$: the boost heat is $\delta Q = \Srel/2\pi = \pi a^2 / 2\Lambda$, and the Killing energy of the pulse, from \eqref{eq:KillingH}, is $E_\xi = \Srel/\beta = \pi a^2/2\sqrt{\Lambda}$, so that $\Srel = \beta E_\xi$ is an exact Clausius relation at the Bousso--Hawking temperature \eqref{eq:temperature} --- derived, for this state, rather than assumed. The area response below assigns the perturbed bifurcation sphere
+\begin{equation}
+\delta A = 4\,\Srel = \frac{4\pi^2 a^2}{\Lambda},
+\qquad
+\frac{\delta A}{A} = \pi a^2
+\;\;(\text{Planck units}),
+\qquad
+S(\tilde{\mathcal{S}}) = \frac{\pi}{\Lambda}\big(1 + \pi a^2\big),
+\label{eq:example-area}
+\end{equation}
+so the perturbative regime of the response ansatz \eqref{eq:perturbation} is the amplitude condition $a^2 \ell_P^2 \ll 1$, and the fractional area shift per unit relative entropy is $(\delta A/A)/\Srel = \Lambda/\pi = 1/S_{\mathrm{N}}$ --- the explicit numerical realization of the self-generated hierarchy of Section~\ref{sec:timescales}: one nat of distinguishability moves the extremal ledger by one part in the horizon entropy.
+
+\subsection{Area variation with a finite reference area}
+
+The excitation back-reacts on the geometry. Model the response, as in Ref.~\cite{DorauMuch}, by a linear perturbation of the induced metric on the bifurcation sphere, sourced by the flux with an undetermined coupling $\alpha > 0$ --- a model Section~\ref{sec:JT} will derive, together with $\alpha$, from the $s$-wave dynamics of the throat:
+\begin{equation}
+\tilde{h}_{ij}
+= h_{ij}\left(1 - \varepsilon\,\alpha \int_{(-\infty,0)} U\, \langle{:}T_{ab}{:}\rangle_{\omega_\phi}\, \xi^a\xi^b \, dU \right).
+\label{eq:perturbation}
+\end{equation}
+The first-order area variation of the perturbed sphere $\tilde{\mathcal{S}}$ is
+\begin{equation}
+\delta A
+= \frac{dA(\tilde{\mathcal{S}})}{d\varepsilon}\bigg|_{\varepsilon = 0}
+= -\alpha \int_{\mathcal{H}_B^{\mathcal{R}}} U\, \langle{:}T_{ab}{:}\rangle_{\omega_\phi}\, \xi^a\xi^b \; dU\; d\mathrm{vol}_{\mathcal{S}}
+\;\overset{\eqref{eq:pivot-nariai}}{=}\;
+\frac{\alpha}{2\pi}\, \Srel .
+\label{eq:deltaA-nariai}
+\end{equation}
+Imposing the Bekenstein--Hawking normalization $\Srel = \delta A / 4$ then fixes
+\begin{equation}
+\alpha = 8\pi,
+\end{equation}
+and the localization argument --- demanding \eqref{eq:deltaA-nariai} for the local Rindler horizons through every point, with the Raychaudhuri equation converting area variation to Ricci curvature and the Bianchi identity supplying the undetermined $\Lambda g_{ab}$ --- recovers the semiclassical Einstein equations with the correct coupling, exactly as in the flat construction. Lest this final step appear to re-import the pathology the paper set out to avoid: the local Rindler construction is invoked only \emph{differentially}, as tangent-space kinematics in which only $\delta A$ is used and the infinite Rindler area never enters. What the wedge cannot do, and \Nariai{} supplies, is the \emph{global calibration} --- fixing the Bekenstein--Hawking coefficient $1/4$ against a finite total area, without subtractions. There is no circularity: the compact geometry calibrates the framework once and globally; the local wedges transport the calibrated, purely differential statement to every tangent space.
+
+\subsection{The response model as a linearized Jackiw--Teitelboim theorem}
+\label{sec:JT}
+
+The response model \eqref{eq:perturbation} is the one postulate in the chain above; on \Nariai{} it can be derived. The $s$-wave sector of the throat is exactly two-dimensional dilaton gravity: inserting the spherically symmetric ansatz
+\begin{equation}
+ds^2 = g_{ab}(x)\, dx^a dx^b + \Phi_{\mathrm{dil}}(x)\, d\Omega^2,
+\qquad
+A(\mathrm{cut}) = 4\pi\, \Phi_{\mathrm{dil}},
+\label{eq:JT-ansatz}
+\end{equation}
+into the four-dimensional Einstein--Hilbert action with cosmological constant and expanding about the degenerate point, $\Phi_{\mathrm{dil}} = \Lambda^{-1} + \phi_{\mathrm{dil}}$ with $g_{ab}$ the $dS_2$ metric ($R = 2\Lambda$), yields de~Sitter Jackiw--Teitelboim (JT) gravity for the perturbation: the $\Lambda > 0$ counterpart of the near-extremal $AdS_2$ throat, arising in pure gravity with no charge \cite{MertensTuriaci} (the same reduction underlies Refs.~\cite{FanarasVilenkin,Rusalev}). We need only its linearized dilaton equation of motion,
+\begin{equation}
+\nabla_a \nabla_b\, \phi_{\mathrm{dil}} \;-\; g_{ab}\,\square\, \phi_{\mathrm{dil}} \;+\; \Lambda\, g_{ab}\, \phi_{\mathrm{dil}}
+\;=\; -\,8\pi G\; T^{(\ell=0)}_{ab},
+\label{eq:JT-eom}
+\end{equation}
+sourced by the $s$-wave projection of the matter stress tensor, so that the area variation of any horizon cut is $\delta A = 4\pi\,\phi_{\mathrm{dil}}$ evaluated there. On the horizon $V = 0$ the $UU$ component of \eqref{eq:JT-eom} collapses --- $g_{UU} = 0$, and the connection coefficient $\Gamma^{U}_{\;UU} \propto V$ vanishes there --- to the linearized Raychaudhuri equation
+\begin{equation}
+\partial_U^2\, \phi_{\mathrm{dil}}
+= -\,\frac{8\pi G}{\Lambda}\; \langle{:}T_{UU}{:}\rangle_{\omega_\phi}\,.
+\label{eq:JT-null}
+\end{equation}
+The general solution along a generator is a particular integral plus the kernel $\mathrm{span}\{1,\, U\}$ of $\partial_U^2$ --- the horizon restriction of the $\mathfrak{sl}(2,\mathbb{R})$ zero modes of \eqref{eq:JT-eom}. Neither kernel element is a response: the constant mode is a relabeling of the background area along the static SdS family, and the linear mode is the memory mode, growing with the total absorbed flux --- the linear-theory face of the branch drift of Section~\ref{sec:instability}, evolving at the rate $\Gamma$ of \eqref{eq:Gamma} and already quarantined by the timescale hierarchy. Modulo this kernel the flux-sourced solution is unique, and integrating \eqref{eq:JT-null} twice --- equivalently, using the modular weight as the Green kernel of $\partial_U^2$ on $\mathcal{H}_B^{\mathcal{R}}$ --- gives the bifurcation-surface response
+\begin{equation}
+\boxed{\;
+\delta A
+\;=\; 4\pi\, \phi_{\mathrm{dil}}\big|_{U = 0}
+\;=\; -\,8\pi G \int_{\mathcal{H}_B^{\mathcal{R}}} U\, \langle{:}T_{ab}{:}\rangle_{\omega_\phi}\, \xi^a\xi^b\; dU\, d\mathrm{vol}_{\mathcal{S}}
+\;\overset{\eqref{eq:pivot-nariai}}{=}\;
+4\,G\, \Srel
+\;}
+\label{eq:JT-response}
+\end{equation}
+Equation \eqref{eq:JT-response} is \eqref{eq:deltaA-nariai} with $\alpha = 8\pi$ \emph{derived}: the coupling descends from the four-dimensional reduction, not from a normalization imposed on the entropy side. In the $s$-wave sector --- the only sector the instability dynamics requires, by the mass suppression of Section~\ref{sec:algebra} --- the identification $\Srel = \delta A/4$ is therefore a theorem of linearized JT dynamics on the throat: the ansatz \eqref{eq:perturbation} is the unique zero-mode-free solution of \eqref{eq:JT-null}, and the modular weight $(-U)$ enters as the Green kernel of the dilaton equation rather than as a modular-theory input --- the two structures agree because both are the boost Jacobian, Eq.~\eqref{eq:jacobian-identity}. (The overall sign is fixed only once the disposition of the memory mode is chosen; retarded and teleological framings differ by exactly the kernel, the convention-dependence of item~(iii), Section~\ref{app:remains}. The magnitude and the modular weighting are frame-independent.)
+
+\subsection{Beyond the Rindler wedge}
+
+\emph{(a) The identification is anchored to a finite total.} On the Rindler horizon, $\Srel = \delta A/4$ relates two first-order variations over an infinite reference area; the ``integrated'' form of the identification is empty. On \Nariai{} the reference entropy \eqref{eq:Smax} is finite, and the perturbed configuration carries
+\begin{equation}
+S(\tilde{\mathcal{S}}) = \frac{A(\tilde{\mathcal{S}})}{4} =
+\underbrace{\frac{\pi}{\Lambda}}_{\substack{\text{extremal capacity:}\\ \text{state-independent}}}
++ \underbrace{\Srel(\omega_0\,\|\,\omega_\phi)}_{\substack{\text{record of the realized state's}\\ \text{distinguishability from vacuum}}},
+\label{eq:ledger}
+\end{equation}
+a bookkeeping equation between finite quantities --- the precise form of the ledger metaphor of Section~\ref{sec:geometry}.
+
+\emph{(b) Extremality becomes a consistency condition.} Within the SdS family at fixed $\Lambda$, no horizon exceeds the \Nariai{} area, yet \eqref{eq:ledger} adds $\Srel \ge 0$ \emph{on top of} the extremal value. There is no contradiction --- the perturbed spacetime is no longer in the static family, and positive flux through the degenerate horizon is what pushes the geometry off the extremal point --- but the tension is directional: a horizon already at maximal area, receiving strictly positive relative entropy, \emph{must evolve}. The equilibrium identification predicts its own breakdown, with a sign; this is the seed of Section~\ref{sec:instability}.
+
+\emph{(c) Comparison with neighboring results.} Equation \eqref{eq:Srel-nariai} completes a triangle: for spherically symmetric future outer trapping horizons, Kurpicz, Pinamonti, and Verch~\cite{KPV} found the relative entropy of coherent states proportional to the finite area of a horizon-cross-section patch, with an analogous statement for the de~Sitter cosmological horizon. \Nariai{} is where these two horizon types merge into a single object, and \eqref{eq:pivot-nariai} exhibits the common modular mechanism. In the nondegenerate limit the construction must, and does, split back into the two-temperature problem: restoring $\varepsilon > 0$ separates the surface gravities, the global KMS state is lost, and \eqref{eq:Srel-nariai} bifurcates into horizon-by-horizon quantities with distinct modular flows. The degenerate point is the unique configuration in the family where the entropic derivation of the Einstein equations closes globally.
+
+\section{Entropy Flow and the \Nariai{} Instability}
+\label{sec:instability}
+
+\subsection{The perturbed geometry and the two branches}
+
+Restoring $\varepsilon > 0$ in the Ginsparg--Perry parametrization separates the horizon radii symmetrically about the degenerate value,
+\begin{equation}
+r_b = r_\star\big(1 - \varepsilon + \mathcal{O}(\varepsilon^2)\big),
+\qquad
+r_c = r_\star\big(1 + \varepsilon + \mathcal{O}(\varepsilon^2)\big),
+\qquad r_\star = \tfrac{1}{\sqrt{\Lambda}},
+\label{eq:split}
+\end{equation}
+so that at first order the horizon areas change by equal and opposite amounts,
+\begin{equation}
+\delta A_b = -\,\delta A_c = -\,8\pi r_\star^2\, \varepsilon,
+\qquad
+\delta\big(A_b + A_c\big) = \mathcal{O}(\varepsilon^2) > 0 .
+\label{eq:antipodal}
+\end{equation}
+In the $s$-wave reduction of Section~\ref{sec:algebra}, the perturbation is carried by the radius field of the two-sphere, a single two-dimensional degree of freedom on the $dS_2$ factor; the ``two horizons'' of the perturbed solution are the two poles of the $dS_2$ Penrose square, antipodal cuts of what, at $\varepsilon = 0$, was a single degenerate horizon. Bousso and Hawking~\cite{BoussoHawking} found that the quantum-corrected dynamics of this radius field admits two branches: \emph{evaporation}, in which the perturbation \eqref{eq:split} grows, and \emph{anti-evaporation}, in which the perturbed black-hole horizon grows back toward degeneracy. Which branch is realized depends on the quantum state of the matter driving the perturbation --- a dependence that has remained a model-by-model statement about renormalized stress tensors. The entropic framework sharpens it into a statement about state classes.
+
+This section uses equilibrium modular tools on the very instability that ends the equilibrium; the timescale hierarchy of Section~\ref{sec:timescales} licenses this. The branch analysis is adiabatic --- fast-time (modular) tools determine, at each stage, the sign of the slow-time drift --- and requires only that the instability be slow on the modular clock, which \eqref{eq:hierarchy} guarantees by $\sim 120$ orders of magnitude.
+
+\subsection{Positivity selects a branch in the coherent sector}
+
+Consider a nontrivial coherent excitation $\omega_\phi$ whose flux crosses a given pole of the horizon. Three facts, each established above, combine:
+\begin{enumerate}
+\item $\Srel(\omega_0\,\|\,\omega_\phi) > 0$ for every nontrivial coherent state, by \eqref{eq:Srel-nariai} with $U<0$ on $\mathcal{H}_B^{\mathcal{R}}$;
+\item within the perturbative response model \eqref{eq:perturbation}, the pierced cut obeys $\delta A = 4\,\Srel$;
+\item the flux term $\langle{:}T_{ab}{:}\rangle_{\omega_\phi}\xi^a\xi^b = (\partial_U\phi)^2$ is pointwise non-negative --- coherent states cannot deliver negative boost-energy density anywhere on the horizon.
+\end{enumerate}
+The conclusion is a selection rule: \emph{within the coherent sector, the area of any horizon cut receiving flux can only increase.} A perturbed black-hole pole receiving coherent flux grows back toward the degenerate radius; a cosmological pole receiving the same flux grows away from it. No coherent state can drive the pierced cut's area \emph{down}.
+
+The contrapositive is the sharper statement. Anti-evaporation, in the regime where it requires the area of a flux-receiving cut to decrease, demands $\delta A < 0$ at that cut --- hence, by the identification, negative relative entropy, which no state can supply, or negative integrated boost-energy density, which no \emph{coherent} state can supply. Anti-evaporation in that regime is therefore a certificate of non-coherence: it can occur only when the horizon flux is dominated by states outside the coherent family --- squeezed states, particle-subtracted states, or the renormalized vacuum polarization itself --- for which the pointwise positivity of item 3 fails. What Ref.~\cite{DorauMuch} and Section~\ref{sec:entropy} treat as the principal open gap of the framework --- its restriction to coherent states --- is here promoted to physics: \emph{the boundary of the coherent sector is the boundary between the two branches of the \Nariai{} instability.} We emphasize the status of this statement: within the linear-response, quasi-equilibrium regime it is a derived selection rule; as a statement about the full (anti-)evaporation dynamics it is a conjecture, whose sharpest test is the squeezed-state computation of Sections~\ref{app:squeezed}--\ref{app:numerics}.
+
+\subsection{Antipodal balance and the conservation of distinguishability}
+
+The antipodal structure \eqref{eq:antipodal} yields a second, independent statement. At first order the area gained at one pole equals the area lost at the other, so the entropic identification applied to both cuts gives
+\begin{equation}
+S^{\mathrm{rel}(b)} + S^{\mathrm{rel}(c)}
+= \frac{\delta A_b + \delta A_c}{4}
+= \mathcal{O}(\varepsilon^2),
+\label{eq:balance}
+\end{equation}
+where $S^{\mathrm{rel}(b,c)}$ denote the signed entropy assignments at the two poles. Since each genuine relative entropy is non-negative, \eqref{eq:balance} cannot be satisfied at first order by positive quantities at both poles: distinguishability injected at one pole must be \emph{withdrawn} from the other.
+
+Within the coherent sector the resolution is immediate --- a coherent pulse crosses one pole, its antipode receives no flux, and the balance holds trivially with one vanishing term while the geometry adjusts. But for the vacuum-polarization-driven instability, where both poles participate, \eqref{eq:balance} functions as a sum rule: the first-order entropy budget of the horizon pair is closed, and net horizon entropy is generated only at second order, $\propto \varepsilon^2$. We call this the \emph{antipodal balance} of the degenerate horizon --- a statement invisible from any single-horizon construction, existing only because \Nariai{} binds two horizon cuts into one modular object.
+
+\subsection{Predictions}
+
+The testable content of this section is threefold; each item is a conjecture in the sense of Section~\ref{sec:intro}, derived within the linear-response regime and extrapolated beyond it. First, the branch--state correspondence: coherent (classical) matter flux drives the pierced cut's area up, so purely classical perturbations realize the separating branch, and anti-evaporation under a given matter state diagnoses that state's horizon flux as non-coherent. This is checkable against the existing literature: the states for which anti-evaporation has been reported are precisely quantum-corrected, non-coherent configurations, and the framework predicts this could not have been otherwise. Second, the sharp computational test: extend the relative-entropy computation to squeezed states, where $\Srel$ and the boost-energy flux are no longer forced to coincide; the framework predicts that the discrepancy $\Srel - 2\pi\,\delta Q$, wherever nonzero, has the sign and support required to fund the anti-evaporating branch. Verification would extend the Dorau--Much derivation into its first non-classical regime; falsification would locate the boundary of validity of entropic gravity as a derivation of the Einstein equations. Third, the antipodal sum rule \eqref{eq:balance} --- first-order entropy balance between the poles, net production only at $\mathcal{O}(\varepsilon^2)$ --- is a quantitative target for numerical studies of the perturbed solution, a budget that generic semiclassical evolution does not enforce.
+
+\section{Discussion: The Entropy of Events Relative to Non-Events}
+\label{sec:discussion}
+
+We do not presuppose that horizon entropy is a von Neumann entropy --- $-\mathrm{Tr}\,\rho\ln\rho$ of some density matrix on some substrate Hilbert space, with $e^{A/4}$ microstates behind it. On the horizon algebra $\mathscr{N}_{\mathcal{R}}$, a type III factor, there are no density matrices, no partial traces, and no microstate count; the von Neumann entropy of a subregion is not merely divergent but undefined. What survives is the \emph{relative} entropy of Araki: a well-defined, finite functional of a \emph{pair} of states. The only entropy the framework ever uses is relational.
+
+The quantity that drives the derivation, $\Srel(\omega_0\,\|\,\omega_\phi)$, is the information-theoretic distinguishability of the realized state from the reference vacuum --- operationally, the inability of any observer confined to the horizon algebra to mistake the world in which the excitation occurred for the world in which it did not. It is an entropy of \emph{events relative to non-events}, evaluated on the causal boundary that registers the difference. Gravity responds to this distinguishability: the geometry adjusts, via $\delta A = 4\,\Srel$, by exactly the amount required to record in area the information separating the realized configuration from the unrealized one, and the Einstein equations are the local bookkeeping identity of this record. Nothing is being counted, because nothing needs to be: the ``entropy'' of the horizon was never an inventory of hidden constituents, but a ledger of distinctions.
+
+The ledger equation \eqref{eq:ledger} splits the finite total into a state-independent extremal capacity and a state-dependent record of realized distinctions; the unambiguous normalization of Section~\ref{sec:geometry} makes the record observer-independent in a way the Rindler construction cannot achieve; and the antipodal balance \eqref{eq:balance} shows the ledger is \emph{conserved} at first order across the horizon pair --- distinctions are transferred, not created, until second order.
+
+We close with a speculation, clearly labeled as such and on which nothing else in this paper depends: that the progressive registration of distinctions on causal horizons is what the ``collapse'' of quantum alternatives consists of, with the maximal-entropy \Nariai{} configuration a terminal surface on which the separation of the realized from the unrealized is complete, and the finite capacity $\pi/\Lambda$ bounding the total number of distinctions the cosmos can ever register~\cite{Hartshorn2025}. Assessing this interpretation is beyond the scope of the present results.
+
+
+\section{Outlook and Open Problems}
+\label{sec:outlook}
+
+\subsection{Beyond coherent states}
+
+The most consequential extension is the one Section~\ref{sec:instability} converts into a prediction: $\Srel(\omega_0\,\|\,\omega)$ for squeezed and multi-particle states on the \Nariai{} horizon, where the difference $\Srel - 2\pi\,\delta Q$ becomes the central object --- the quantity that, on our reading, funds the anti-evaporating branch. Techniques for non-coherent excitations on horizon algebras exist in the literature but have not been deployed on a compact bifurcation surface, where the $\ell = 0$ sector is admissible and the answer has immediate dynamical meaning. Section~\ref{app:squeezed} takes the first steps and derives the structural result on which Section~\ref{sec:instability} relies: for wedge-local squeezed excitations the pivot identity survives with the quantum flux replacing the classical one, local negativity of that flux becomes available, and positivity of the Araki entropy caps the negativity globally.
+
+\subsection{Field content and additivity}
+
+The derivation, here as in Ref.~\cite{DorauMuch}, concerns a single minimally coupled scalar. The universality of the scaling limit \eqref{eq:scaling-limit} suggests that each Standard-Model field contributes an identical horizon structure, with relative entropies adding over species; but suggestion is not proof, and $\alpha = 8\pi$ must emerge species-independently for the derivation to survive realistic matter. The dimensional reduction of Section~\ref{sec:algebra} offers a concrete route: additivity becomes a statement about towers, checkable mode by mode.
+
+\subsection{The response ansatz}
+
+In the $s$-wave sector the linear-response model \eqref{eq:perturbation} is no longer a postulate (Section~\ref{sec:JT}). What remains open is its extension beyond spherical symmetry --- the response of non-spherical cuts to higher-harmonic flux, where no two-dimensional reduction is available and where the exponential decoupling of the $\ell \ge 1$ tower suppresses, but does not eliminate, the question. A derivation from a constrained variational principle (maximizing horizon entropy at fixed relative-entropy influx, in the spirit of entanglement-equilibrium arguments) remains the natural route, and the finite ledger \eqref{eq:ledger} provides, for the first time, a setting in which such a variational statement involves only finite quantities.
+
+% PART II
+
+\section{Squeezed Excitations on the \Nariai{} Horizon}
+\label{app:squeezed}
+
+This section extends the relative-entropy computation from coherent to squeezed excitations. It is a sketch in the strict sense: the algebraic steps are assembled from established results, and the remaining analytic work --- primarily domain questions for quadratic generators in the type III setting --- is identified explicitly at the end. Even so, it establishes the two structural facts on which Section~\ref{sec:instability} relies: the pivot identity survives beyond coherent states in a modified, \emph{quantum} form, and the modification opens locally negative flux windows while global positivity of the relative entropy bounds their total budget.
+
+\subsection{Wedge-local Gaussian excitations}
+\label{app:gaussian}
+
+Coherent states \eqref{eq:coherent} are generated by Weyl unitaries $W(\phi) = e^{i\Phi(\phi)}$, linear in the field; the natural next class is Gaussian, generated by \emph{quadratic} expressions,
+\begin{equation}
+W_S = \exp\!\left[\frac{i}{2}\,\Phi(f)\,\Phi(g) + \mathrm{h.c.}\right],
+\qquad f, g \in C^\infty_c(\mathcal{H}_B^{\mathcal{R}}),
+\label{eq:squeeze-unitary}
+\end{equation}
+whose adjoint action implements a symplectic (Bogoliubov) transformation $S$ on the horizon data rather than a shift. The squeezed state is $\omega_S = \omega_0 \circ \mathrm{Ad}\,W_S^\dagger$, with GNS vector $\Omega_S = W_S\,\Omega_0$. Because $f, g$ are supported on the right horizon portion, $W_S$ is (formally) a unitary \emph{in} $\mathscr{N}_{\mathcal{R}}$: the excitation is wedge-local, a squeezing operation performed entirely on the observer's side of the horizon.
+
+For orientation it suffices to squeeze a single mode. Let $\chi(U,s)$ be a normalized horizon wavepacket, positive-frequency with respect to the \emph{boost} time $u = -\kappa^{-1}\ln(-\kappa U)$ --- the frequency notion adapted to the modular flow --- with annihilation operator $a$. The single-mode squeezed vacuum is
+\begin{equation}
+|r, \theta\rangle
+= \exp\!\left[\tfrac{r}{2}\big(e^{i\theta} a^{\dagger 2} - e^{-i\theta} a^2\big)\right] \Omega_0 ,
+\qquad
+\langle a^\dagger a\rangle = \sinh^2\! r,
+\quad
+\langle a^2 \rangle = -e^{i\theta}\sinh r\,\cosh r .
+\label{eq:squeezed-state}
+\end{equation}
+
+\subsection{The horizon flux of a squeezed state}
+\label{app:flux}
+
+Inserting the mode expansion of $\partial_U \Phi$ into the normal-ordered energy density and evaluating in \eqref{eq:squeezed-state} gives (up to conventions in the phase $\theta$)
+\begin{equation}
+\big\langle{:}T_{UU}{:}\big\rangle_{S}
+= \underbrace{2\sinh^2\! r\;\big|\partial_U \chi\big|^2}_{\substack{\text{particle part:}\\ \text{pointwise } \ge 0}}
+\;-\; \underbrace{\sinh 2r\;\mathrm{Re}\!\left[e^{-i\theta}\big(\partial_U \chi\big)^2\right]}_{\substack{\text{interference part: oscillatory,}\\ \text{can locally dominate since } \sinh 2r > 2\sinh^2\! r}}.
+\label{eq:TUU-squeezed}
+\end{equation}
+The structure is the entire physical point. The first term is the particle content of the squeeze, the analogue of the coherent flux. The second is an \emph{interference} term with no coherent-state counterpart, controlled by the squeezing angle $\theta$, which can locally overwhelm the first: squeezed states deliver genuinely negative boost-energy flux on intervals of the horizon --- the null-energy-condition-violating windows that, in the semiclassical literature, are the engine of anti-evaporation. Item 3 of the selection argument in Section~\ref{sec:instability} fails for this class exactly as the framework requires it to.
+
+\subsection{The pivot identity in quantum form}
+\label{app:pivot}
+
+The relative entropy of a unitarily excited state is governed by the sum rule
+\begin{equation}
+\Srel(\omega_0\,\|\,\omega)
+= \Delta\langle K \rangle - \Delta S,
+\label{eq:sumrule}
+\end{equation}
+where $K = -\ln \Delta_{\mathcal{R}}$, $\Delta\langle K\rangle = \langle K \rangle_\omega - \langle K\rangle_{\omega_0}$, and $\Delta S$ is the (formal) change in entanglement entropy across the horizon cut. The decisive fact, established for wedge-local unitary excitations in the algebraic literature~\cite{FLPW,Longo2019,CLR}, is that acting with a unitary \emph{from the algebra} does not change the entanglement term: $\Delta S = 0$ for $\omega = \omega_0 \circ \mathrm{Ad}\,W^\dagger$ with $W \in \mathscr{N}_{\mathcal{R}}$. For coherent states this reproduces the Dorau--Much result; for the squeezed state \eqref{eq:squeezed-state} it yields
+\begin{equation}
+\boxed{\;
+\Srel(\omega_0\,\|\,\omega_S)
+= 2\pi \int_{\mathcal{H}_B^{\mathcal{R}}} (-U)\,
+\big\langle{:}T_{UU}{:}\big\rangle_{S}\; dU\; d\mathrm{vol}_{\mathcal{S}}
+\;}
+\label{eq:pivot-squeezed}
+\end{equation}
+with the \emph{quantum} flux \eqref{eq:TUU-squeezed} in place of the classical one. The pivot identity of Section~\ref{sec:entropy} therefore survives beyond the coherent sector --- but what it equates has changed character: the right-hand side is no longer the energy of a classical solution, and its integrand is no longer pointwise non-negative. The relation $\Srel = 2\pi\,\delta Q$ holds with $\delta Q$ reinterpreted as modular-weighted quantum flux; the \emph{classical} identity, and with it the term-by-term positivity that drove the selection rule of Section~\ref{sec:instability}, is what breaks. This is the precise sense in which ``the boundary of the coherent sector is the boundary between the branches.''
+
+\subsection{Positivity as a global budget: the squeeze--shape inequality}
+\label{app:budget}
+
+Inserting \eqref{eq:TUU-squeezed} into \eqref{eq:pivot-squeezed} and defining the packet functionals
+\begin{equation}
+I_1 = \int (-U)\,\big|\partial_U\chi\big|^2\, dU\, d\mathrm{vol}_{\mathcal{S}} \;\ge 0,
+\qquad
+I_2 = \int (-U)\,\big(\partial_U\chi\big)^2\, dU\, d\mathrm{vol}_{\mathcal{S}} \in \mathbb{C},
+\end{equation}
+the relative entropy becomes
+\begin{equation}
+\Srel = 2\pi\Big[\, 2\sinh^2\! r \; I_1 \;-\; \sinh 2r\; \mathrm{Re}\big(e^{-i\theta} I_2\big) \Big].
+\label{eq:Srel-squeezed}
+\end{equation}
+Non-negativity of the Araki entropy must hold for \emph{every} squeezing angle $\theta$, including the angle aligning the interference term against $I_1$; minimizing over $\theta$ yields the constraint
+\begin{equation}
+\frac{|I_2|}{I_1} \;\le\; \tanh r
+\qquad \text{for every admissible squeezed packet.}
+\label{eq:squeeze-shape}
+\end{equation}
+We call \eqref{eq:squeeze-shape} the \emph{squeeze--shape inequality}. Read as a consistency condition, it asserts that boost-positive-frequency packets automatically have their phase-coherence functional $|I_2|$ suppressed relative to their intensity functional $I_1$ --- a suppression that should follow from the analyticity of positive-boost-frequency data, in the same way the averaged null energy condition follows from modular positivity~\cite{FLPW}. Verifying \eqref{eq:squeeze-shape} directly from packet analyticity is the first concrete task of the full computation, and is carried out in Section~\ref{app:numerics}; a violation would signal an inconsistency in the wedge-locality assumption for the generator \eqref{eq:squeeze-unitary}, not in the framework.
+
+Read physically, \eqref{eq:Srel-squeezed}--\eqref{eq:squeeze-shape} constitute the budget announced in Section~\ref{sec:instability}. Define the anti-evaporation window $\mathcal{W} \subset \mathcal{H}_B^{\mathcal{R}}$ as the region where \eqref{eq:TUU-squeezed} is negative, with funded depth
+\begin{equation}
+\mathcal{D}(\mathcal{W})
+= -\int_{\mathcal{W}} (-U)\, \big\langle{:}T_{UU}{:}\big\rangle_S \, dU\, d\mathrm{vol}_{\mathcal{S}} \;\ge 0 .
+\end{equation}
+Then \eqref{eq:pivot-squeezed} and $\Srel \ge 0$ give immediately
+\begin{equation}
+\mathcal{D}(\mathcal{W})
+\;\le\;
+\int_{\mathcal{H}\setminus\mathcal{W}} (-U)\,\big\langle{:}T_{UU}{:}\big\rangle_S\, dU\, d\mathrm{vol}_{\mathcal{S}} :
+\label{eq:budget}
+\end{equation}
+every unit of modular-weighted negative flux --- every increment of local horizon-area decrease available to drive the anti-evaporating branch --- must be prepaid by positive flux elsewhere on the same horizon. Anti-evaporation is permitted locally and bounded globally: a redistribution within a non-negative ledger, never an overdraft. In the linear-response model, \eqref{eq:budget} bounds the depth and modular duration of any anti-evaporation episode in terms of $(r, \theta)$ and the packet shape --- the quantitative form of the branch--state correspondence, and the concrete target we propose for comparison against semiclassical (anti-)evaporation numerics.
+
+The budget \eqref{eq:budget} is recognizably a curved-space, modular-weighted realization of two theorems from the quantum-information side of gravity: its temporal structure --- negative-energy loans repaid by positive flux on the same horizon, with the modular weight $(-U)$ setting the exchange rate --- is the horizon form of the Quantum Interest Conjecture \cite{FordRoman}, and its origin in the positivity of a relative entropy is the modular-positivity mechanism underlying the Quantum Null Energy Condition \cite{QNEC,FLPW}. The squeeze--shape inequality \eqref{eq:squeeze-shape}, and the exact zero-sum theorem \eqref{eq:I2-zero} that sharpens it, may thus be read as the \Nariai{}-horizon instances of the QNEC/QIC circle of ideas, with every integral finite.
+
+\subsection{What remains}
+\label{app:remains}
+
+Three items separate this sketch from a theorem, in ascending difficulty. (i) Verifying the squeeze--shape inequality \eqref{eq:squeeze-shape} from the analyticity of boost-positive-frequency horizon data --- a computation in classical complex analysis. (ii) Rigorously justifying $\Delta S = 0$ in \eqref{eq:sumrule} for the \emph{quadratic} generator \eqref{eq:squeeze-unitary}: unlike the Weyl case, $W_S$ is an exponential of an unbounded quadratic expression, and its affiliation to $\mathscr{N}_{\mathcal{R}}$, with the domain properties of $\Omega_S$ required by Araki's definition, must be established rather than assumed; the one-mode restriction \eqref{eq:squeezed-state} is the tractable entry point. (iii) Extending the identification $\delta A = 4\,\Srel$ to fluxes without a definite sign, where the teleological character of the horizon under backreaction can no longer be ignored \cite{Panella2025} --- equivalently, the theory of the horizon \emph{outside} the quasi-equilibrium window, where only the running-ledger kinematics of Section~\ref{app:ledger} survives. Items (i) and (ii) are, we believe, within reach of existing algebraic technology; item (iii) is where the entropic framework will meet its first genuinely dynamical test.
+
+
+% PART III
+
+\section{Resolution of the Squeeze--Shape Inequality}
+\label{app:numerics}
+
+This section settles item (i) of Section~\ref{app:remains} exactly, and verifies the mechanism behind item (ii) at its tractable one-mode entry point, by explicit computation; the script \href{https://github.com/brentharts/NariaiRelativeEntropy/blob/main/appendix_b_verification.py}{\texttt{appendix\_b\_verification.py}} reproduces every number quoted below.
+
+\subsection{Interference Functional Vanishes}
+\label{app:exact}
+
+The resolution turns on a single change of variables. With $U = -\kappa^{-1} e^{-\kappa u}$ the boost time on the horizon, the modular weight and the affine measure combine into the boost measure \emph{exactly}:
+\begin{equation}
+(-U)\, dU \;=\; \frac{1}{\kappa}\, e^{-2\kappa u} \cdot e^{\kappa u}\,\big(e^{\kappa u} du\big)
+\;=\; \frac{1}{\kappa}\, du,
+\qquad
+(-U)\,\big(\partial_U \chi\big)^2\, dU = \frac{1}{\kappa}\,\big(\partial_u \chi\big)^2\, du .
+\label{eq:jacobian-identity}
+\end{equation}
+The modular weight $(-U)$ is not merely analogous to a thermal factor; it \emph{is} the Jacobian that converts affine flux into boost flux. Consequently
+\begin{equation}
+I_2 = \frac{1}{\kappa} \int_{-\infty}^{\infty} \big(\partial_u \chi\big)^2 \, du \, d\mathrm{vol}_{\mathcal{S}}
+= \frac{2\pi}{\kappa} \int d\mathrm{vol}_{\mathcal{S}} \;
+\widetilde{\big(\partial_u\chi\big)^2}\,\Big|_{\omega_{\mathrm{tot}} = 0}\,,
+\label{eq:I2-fourier}
+\end{equation}
+the transverse integral of the Fourier transform of $(\partial_u\chi)^2$ at \emph{total boost frequency zero}. For a packet that is positive-frequency in boost time, $\chi(u) = \int_0^\infty d\omega\, a(\omega)\, e^{-i\omega u}$, the square $(\partial_u\chi)^2$ contains only strictly positive total frequencies $\omega + \omega' > 0$, and its zero-frequency component vanishes identically:
+\begin{equation}
+\boxed{\; I_2 = 0 \quad \text{for every boost-positive-frequency packet.} \;}
+\label{eq:I2-zero}
+\end{equation}
+This is the strongest possible form of the squeeze--shape inequality \eqref{eq:squeeze-shape}: not a bound satisfied with margin, but an exact vanishing. Two corollaries follow immediately.
+
+\emph{(a) First-law form of the squeezed relative entropy.} With $I_2 = 0$, Eq.~\eqref{eq:Srel-squeezed} collapses to
+\begin{equation}
+\Srel(\omega_0\,\|\,\omega_S)
+= 4\pi \sinh^2\! r \; I_1
+= \frac{2\pi}{\kappa}\; 2\sinh^2\! r \int \big|\partial_u \chi\big|^2\, du\, d\mathrm{vol}_{\mathcal{S}}
+= \beta\, \Delta E_{\mathrm{boost}} ,
+\label{eq:first-law}
+\end{equation}
+with $\beta = 2\pi/\sqrt{\Lambda}$ the inverse Bousso--Hawking temperature and $\Delta E_{\mathrm{boost}}$ the boost energy of the $\sinh^2\! r$ created quanta. The relative entropy of a wedge-local squeezed excitation is \emph{thermal}: a Clausius relation, derived rather than assumed, holding beyond the coherent sector.
+
+\emph{(b) The inequality as an exact wedge-locality marker.} For horizon data \emph{not} adapted to the wedge --- e.g.\ a real packet in the affine coordinate, for which $(\partial_U\chi)^2 = |\partial_U\chi|^2$ pointwise --- one has $|I_2|/I_1 = 1$ exactly, and \eqref{eq:squeeze-shape} would demand $\tanh r \ge 1$: no wedge-local squeeze of such a mode exists at any finite $r$. The dichotomy is sharp --- $|I_2|/I_1 = 0$ for boost-adapted data, $1$ for boost-blind data --- so the squeeze--shape functional is a binary detector of whether an excitation respects the modular structure of the horizon.
+
+Physically, \eqref{eq:I2-zero} and \eqref{eq:first-law} sharpen the budget of Section~\ref{app:budget}: the interference term --- the sole source of local flux negativity --- integrates to \emph{exactly zero} against the modular weight. Anti-evaporation windows are funded, to the last unit, by positive flux elsewhere on the same horizon; the squeezing redistributes the ledger in $U$ without changing its total, which is the thermal value \eqref{eq:first-law}. Negativity is a zero-sum reallocation.
+
+\subsection{Numerical verification}
+\label{app:numerics-table}
+
+The script constructs a boost-positive-frequency packet (Gaussian spectral profile centered at $\omega_0 = 3$, width $0.7$, units $\kappa = 1$) on $3.2\times 10^4$ grid points in $u \in [-40, 40]$, evaluating all functionals in both boost and affine coordinates:
+
+\begin{center}
+\begin{tabular}{l l}
+\hline
+Quantity & Value \\
+\hline
+$I_1$ (boost coords) & $7.207087\times 10^{1}$ \\
+$I_1$ (affine coords, cross-check) & $7.207087\times 10^{1}$ \quad (rel.\ diff.\ $2.0\times10^{-16}$) \\
+$|I_2|/I_1$ (boost-positive packet) & $1.3\times 10^{-15}$ \quad (prediction: $0$) \\
+$|I_2|/I_1$ (real affine packet) & $1.000000$ \quad (prediction: $1$) \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+The identity \eqref{eq:jacobian-identity} is confirmed to machine precision, and \eqref{eq:I2-zero} holds at the $10^{-15}$ level, limited only by quadrature. Scanning the squeezed flux \eqref{eq:TUU-squeezed} over squeezing parameters: at $(r, \theta) = (0.5, \pi)$ the flux is negative on $51\%$ of the packet's support with funded depth $\mathcal{D}(\mathcal{W})$ equal to $21\%$ of the positive part, while the modular-weighted total remains positive in every case examined --- negativity windows that are wide and deep locally, and exactly prepaid globally.
+
+For item (ii), the one-mode restriction reduces the sum rule \eqref{eq:sumrule} to a Gaussian-state identity: the wedge restriction of the global vacuum is thermal at $\beta = 2\pi/\kappa$ mode by mode, a wedge-local squeeze is a unitary on that mode, and unitarity forces $\Delta S = 0$, whence $\Srel = \beta\,\Delta E$. Computing both sides independently from covariance matrices at $(\omega, r) \in \{(0.5, 0.3), (1.0, 0.8), (2.0, 1.5)\}$ yields agreement to $\lesssim 2\times 10^{-15}$ in every case, with the closed form
+\begin{equation}
+S^{\mathrm{rel}(\mathrm{1\,mode})} = \beta\,\omega\, \sinh^2\! r \, \coth\!\Big(\frac{\beta\omega}{2}\Big),
+\label{eq:one-mode}
+\end{equation}
+confirmed exactly --- the $\coth$ factor being the thermal occupancy of the wedge mode, the finite-temperature dressing of the first law \eqref{eq:first-law}. In summary: item (i) is settled --- the squeeze--shape inequality is the trivial face of the exact vanishing theorem \eqref{eq:I2-zero}, whose content is that the modular weight is the boost Jacobian; item (ii) is verified at the one-mode level, with the lift to the full quadratic generator remaining a domain-theoretic question, now anchored to a verified target formula; and item (iii), the response of a teleological horizon to sign-indefinite flux, remains the genuinely open dynamical frontier, constrained by the zero-sum structure --- whatever local area decrease the anti-evaporating branch extracts from a negativity window, the same excitation has already deposited elsewhere.
+
+
+\section{The Mode-Resolved Sum Rule}
+
+The obstacle in item (ii) was that the quadratic generator \eqref{eq:squeeze-unitary} is unbounded, so its affiliation to $\mathscr{N}_{\mathcal{R}}$ and the domain properties required by Araki's definition are not automatic. The route around is decomposition. Expanding in spherical harmonics and boost-frequency modes diagonalizes the modular Hamiltonian, and the wedge vacuum factorizes into thermal single-mode states at $\beta = 2\pi/\kappa$ --- the structure verified at one mode above. Any wedge-local Gaussian unitary decomposes into one- and two-mode squeezes with parameters $\{r_k\}$, $k = (\omega, \ell, m)$; for each factor $\Delta S = 0$ holds by unitary invariance of the Gaussian entropy, and \eqref{eq:one-mode} applies. Additivity then lifts the sum rule to the full generator, \emph{provided} the product of squeezes is unitarily implementable --- precisely the content of Shale's theorem~\cite{Shale}: the off-diagonal part of the symplectic map must be Hilbert--Schmidt. The lifted sum rule reads
+\begin{equation}
+\Srel(\omega_0\,\|\,\omega_S)
+= \sum_{k}\;
+\underbrace{\sinh^2\! r_k}_{\substack{\text{particle content}\\ \text{of mode } k}}
+\;\cdot\;
+\underbrace{\beta\,\omega_k \coth\!\Big(\frac{\beta\omega_k}{2}\Big)}_{\substack{\text{thermal weight:}\\ \text{first law, dressed by}\\ \text{wedge occupancy}}}
+\;,
+\qquad
+\underbrace{\sum_k \sinh^2\! r_k < \infty}_{\substack{\text{Shale condition:}\\ \text{implementability}}},
+\quad
+\underbrace{\sum_k \omega_k \nu_k \sinh^2\! r_k < \infty}_{\substack{\text{finiteness of the}\\ \text{entropy itself}}}.
+\label{eq:mode-sum}
+\end{equation}
+Three remarks. First, the compactness of the sphere is again load-bearing: the transverse label $(\ell, m)$ is discrete, so the sums in \eqref{eq:mode-sum} are genuine sums and the two convergence conditions are ordinary summability statements. Second, the conditions are not equivalent --- the entropy sum carries the extra weight $\omega_k \nu_k$ --- so there exist Shale-implementable squeezes with infinite relative entropy; the framework accommodates them, the ledger simply recording $\infty$. Third, and honestly: \eqref{eq:mode-sum} remains a \emph{conjecture}, not a theorem, because the mode-by-mode construction of $\Omega_S$ is not yet certified to land in the domain required by Araki's relative entropy in the type III setting --- the diagonalization is formal until the convergence of the product state to a vector in the natural cone is controlled. Item (ii) is thereby reduced from ``establish domain properties for an unbounded quadratic generator'' to ``verify natural-cone convergence under the Shale condition,'' a single, sharply posed functional-analytic question. We expect it to be answerable with the technology of \cite{Longo2019,CLR}; we do not claim to have answered it.
+
+\subsection{The running ledger}
+\label{app:ledger}
+
+Item (iii) asks how a teleological horizon responds to sign-indefinite flux. Short of solving that dynamical problem, the kinematics of the entropy can be resolved along the horizon. Define the \emph{running ledger}, the modular flux accumulated between a cut at boost time $u_c$ and the bifurcation surface,
+\begin{equation}
+\mathcal{R}(u_c)
+\;=\;
+2\pi \int_{u_c}^{\infty}\!\! du \int d\mathrm{vol}_{\mathcal{S}}\;
+\frac{1}{\kappa}\,\big\langle{:}T_{UU}{:}\big\rangle_S\, e^{-2\kappa u}\Big|_{\mathrm{boost\ density}}
+\;=\;
+2\pi \int_{U_c}^{0} (-U)\,\big\langle{:}T_{UU}{:}\big\rangle_S\; dU\, d\mathrm{vol}_{\mathcal{S}}\,,
+\label{eq:running}
+\end{equation}
+so that $\mathcal{R}(-\infty) = \Srel$ is the total of Section~\ref{app:pivot}. The results of this paper stratify $\mathcal{R}$ completely:
+\begin{equation}
+\mathcal{R}(u_c)
+=
+\underbrace{2\sinh^2\! r \cdot 2\pi\!\int_{u_c}^{\infty}\!\!\big|\partial_u\chi\big|^2 \tfrac{du}{\kappa}\, d\mathrm{vol}_{\mathcal{S}}}_{\substack{\text{particle part: monotone,}\\ \text{non-negative, } \to\, \beta\Delta E_{\mathrm{boost}}}}
+\;-\;
+\underbrace{\sinh 2r \cdot 2\pi\!\int_{u_c}^{\infty}\!\! \mathrm{Re}\big[e^{-i\theta}(\partial_u\chi)^2\big] \tfrac{du}{\kappa}\, d\mathrm{vol}_{\mathcal{S}}}_{\substack{\text{interference part: oscillatory,}\\ \text{source of every dip,}\\ \to\, 0 \text{ as } u_c \to -\infty \ \text{(zero-sum thm.)}}} .
+\label{eq:ledger-strata}
+\end{equation}
+The particle part is a cumulative distribution function, monotone from $0$ to the thermal total; the interference part is a bounded oscillation that must return to zero. Every local decrease of $\mathcal{R}$ --- the cut-resolved shadow of an anti-evaporation window --- is a dip of the second term against the first, bounded by the funded depth $\mathcal{D}(\mathcal{W})$ of Section~\ref{app:budget}. The script \href{https://github.com/brentharts/NariaiRelativeEntropy/blob/main/running_ledger.py}{\texttt{running\_ledger.py}} verifies all three structural claims: $\mathcal{R}(-\infty) = 2\sinh^2\! r\, I_1$ to $10^{-14}$ (the interference total is exactly zero); the dips exist (depth $3.5$--$3.9$ in packet units at $r = 0.5$); and every dip respects the budget. Whatever the eventual dynamical theory of the teleological horizon says, it must be a functional of \eqref{eq:ledger-strata}: the equation already fixes the asymptotics, the sign of the total, and the maximal excursion of any transient. That is the strongest statement item (iii) admits at the kinematic level, and we leave it there.
+
+\subsection{The Dorau--Much--Nariai Equation}
+\label{app:master}
+
+Assembling \eqref{eq:ledger}, \eqref{eq:pivot-nariai}, \eqref{eq:first-law}, and \eqref{eq:mode-sum}, the total entropy this paper assigns to a perturbed \Nariai{} cut is
+\begin{equation}
+\boxed{\;
+S
+=
+\underbrace{\frac{\pi}{\Lambda}}_{\substack{\text{geometry:}\\ \text{extremal capacity,}\\ \text{state-independent}}}
+\;+\;
+\underbrace{2\pi\!\int_{\mathcal{H}_B^{\mathcal{R}}}\!\!(-U)\big(\partial_U\phi\big)^2 dU\, d\mathrm{vol}_{\mathcal{S}}}_{\substack{\text{classical events:}\\ \text{coherent flux}\ =\ 2\pi\,\delta Q_{\mathrm{cl}}}}
+\;+\;
+\underbrace{\sum_k \sinh^2\! r_k\;\beta\,\omega_k \coth\!\Big(\frac{\beta\omega_k}{2}\Big)}_{\substack{\text{quantum events:}\\ \text{squeezed thermal first law}}}
+\;+\;
+\underbrace{\;0\;}_{\substack{\text{interference:}\\ \text{exactly zero-sum}}}
+\;}
+\label{eq:master-final}
+\end{equation}
+with $\beta = 2\pi/\sqrt{\Lambda}$ throughout, and every term finite. Read against the three-link Dorau--Much chain --- modular theory through Bekenstein--Hawking to Einstein (see the annotated notes in the Supplementary Material) --- Eq.~\eqref{eq:master-final} is what that chain becomes on the one spacetime where it closes globally: the assumption-link ($\delta A/4$) has become a finite ledger with an extremal capacity, the theorem-link has been extended one class beyond the coherent sector and found to be thermal there, and the interference sector --- the only place where classical intuition fails locally --- contributes to the total exactly nothing. Entropy of what? Of the columns of \eqref{eq:master-final}: of what happened, classical and quantum, relative to the vacuum in which it did not --- tallied against a capacity set by geometry alone.
+
+\section{The Bulk--Edge Split and Quasinormal Spectra}
+\label{app:bulkedge}
+
+Recent one-loop computations in $\Lambda > 0$ quantum gravity supply an independent decomposition of horizon entropy against which \eqref{eq:master-final} can be tested. This section records the correspondence, states one falsifiable structural prediction, and connects the quasinormal-mode literature on \Nariai{} to the instability analysis. Throughout, correspondence claims are labeled as such: nothing in the body of the paper depends on them.
+
+\subsection{The bulk--edge factorization and the column dictionary}
+\label{app:dictionary}
+
+One-loop Euclidean path integrals for matter and gravitons on the sphere factorize into a \emph{bulk} thermal ideal-gas partition function in the static patch and an \emph{edge} partition function of degrees of freedom on the codimension-2 horizon sphere~\cite{ADLS,LawLochabPRL}. Law and Lochab have computed the edge spectra explicitly both in de~Sitter and --- decisively for us --- in the static \Nariai{} spacetime~\cite{LawLochabPRL,LawLochabPRD}, whose Euclidean section $S^2 \times S^2$ is exactly the arena of Section~\ref{sec:geometry}; for the graviton the edge modes admit a geometric interpretation as fluctuations of the horizon itself~\cite{LawLochabPRL, Ciambelli2026}. Schematically, and suppressing zero-mode subtleties,
+
+\begin{equation}
+Z^{\text{1-loop}}_{S^2 \times S^2}
+\;=\;
+\underbrace{Z_{\mathrm{bulk}}}_{\substack{\text{thermal ideal gas in the}\\ \text{static patch at } \beta = 2\pi/\sqrt{\Lambda}\\[2pt] \updownarrow \text{ (correspondence)}\\ \text{state-dependent columns of \eqref{eq:master-final}:}\\ \text{coherent + squeezed thermal}}}
+\;\times\;
+\underbrace{Z_{\mathrm{edge}}}_{\substack{\text{codim-2 d.o.f.\ on } \mathcal{S} = S^2_{1/\sqrt{\Lambda}}\\[2pt] \updownarrow \text{ (correspondence)}\\ \text{one-loop correction to the}\\ \text{capacity column } \pi/\Lambda}} .
+\label{eq:dictionary}
+\end{equation}
+
+The proposed dictionary is structural: both decompositions separate horizon entropy into a state-independent, horizon-anchored sector and a thermal, state-carrying sector. On our side the split is exact and kinematic; on theirs it is a property of the one-loop measure. The alignment is suggestive rather than proven, but it admits a sharp test.
+
+\emph{Conjecture (edge-blindness of relative entropy).} The Araki--Uhlmann relative entropy depends only on the pair of states restricted to $\mathscr{N}_{\mathcal{R}}$, while the bulk--edge factorization is a property of how the one-loop \emph{partition function} is organized --- of the measure, not of any difference between states. The state-dependent entropy of this paper should therefore be \emph{edge-blind}: edge physics enters horizon thermodynamics only through the capacity column of \eqref{eq:master-final}, never through the event columns. The falsifiable form: compute the relative entropy of a coherent (or squeezed) \emph{graviton} excitation on the \Nariai{} horizon and decompose it in the character basis of Mukherjee~\cite{Mukherjee}; the prediction is purely bulk character content, with vanishing edge contribution. Verification would lock the dictionary \eqref{eq:dictionary} in place; a nonzero edge contribution would falsify the column alignment. The graviton computation would simultaneously address the field-content gap of Section~\ref{sec:outlook}, and the observer-dependence results in the same literature stream are structurally consonant with the relational reading of Section~\ref{sec:discussion}: the edge sector packages the \emph{definition} of the horizon subsystem, the relative entropy measures the \emph{difference between states} of it.
+
+\subsection{Quasinormal spectra, exceptional degeneracy, and branch selection}
+\label{app:qnm}
+
+The bulk characters in \eqref{eq:dictionary} are built on quasinormal spectra, now available for \Nariai{} gravitons~\cite{Mukherjee}; the linearized dynamics of our instability sector is governed by exactly this spectral problem. Two recent results make the connection quantitative. First, Nakamoto and Oshita~\cite{NakamotoOshita} identify \emph{exceptional lines} in the \Nariai{} quasinormal spectrum --- loci where modes coalesce into (nearly) double poles with enhanced excitation factors. Spectral coalescence at the degenerate point is the ringdown-side signature of the same degeneracy that powers this paper. The natural conjecture, stated as a target rather than a result: the branch-selection transient sourced by a running-ledger profile \eqref{eq:ledger-strata} rings preferentially in the nearly-double-pole pair, whose excitation coefficients would then be the ringdown observable distinguishing coherent from non-coherent horizon flux. Second, Aalsma and Faruk~\cite{AalsmaFaruk} observe that, at degeneracy, the correlator between opposite static patches is \emph{identical} whether continued through the black-hole or the cosmological horizon --- exactly the symmetry underlying the antipodal balance \eqref{eq:balance}.
+
+What this establishes is alignment, not derivation: two independent research lines decompose \Nariai{} horizon physics along the same joints as \eqref{eq:master-final}, and the comparison generates two concrete computations --- the graviton relative entropy in the character basis, and the double-pole excitation coefficients of a ledger-sourced transient --- either of which would move the correspondence from proposed to tested.
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Dorau and Much showed that the semiclassical Einstein equations follow from modular theory on a bifurcate Killing horizon, given the identification of relative entropy with one quarter of the horizon area variation. We have shown that the \Nariai{} spacetime is the natural completion of that construction: the unique member of the Schwarzschild--de~Sitter family on which the derivation closes globally, with a compact bifurcation surface rendering every quantity finite, a geometrically fixed Killing normalization removing the Rindler temperature ambiguity, and a distinguished Euclidean vacuum unavailable at any nondegenerate parameter. The one postulate of the flat-space derivation --- the linear-response model for the area --- has been replaced by a theorem: the $s$-wave backreaction of the throat is linearized de~Sitter Jackiw--Teitelboim gravity, whose dilaton equation delivers $\delta A = 4\,\Srel$ with $8\pi$ fixed by dimensional reduction rather than by the Bekenstein--Hawking normalization.
+
+The construction survives its own background's instability by a quantified margin: the modular KMS structure is a quasi-equilibrium whose lifetime exceeds the thermal time by the horizon entropy $S_{\mathrm{N}}$ itself, so the equilibrium tools are exact at the order at which semiclassical gravity is written. The framework is anchored by explicit computation: the modular Hamiltonian in closed form in null and static coordinates, the factorization of the entropy into an area-weighted countable tower of Rindler entropies, a family of $s$-wave excitations with closed-form entropy and an exact Clausius relation $\Srel = \beta E_\xi$, and the vanishing theorem $I_2 = 0$ verified to machine precision. On this arena the identification $\Srel = \delta A/4$ becomes a ledger equation between finite numbers; positivity of relative entropy becomes a selection rule on the branches of the \Nariai{} instability, reclassifying anti-evaporation --- within the stated regime, and conjecturally beyond it --- as a certificate of non-coherent horizon flux; and the antipodal structure of the degenerate horizon yields a first-order conservation law for distinguishability that no single-horizon construction can see.
+
+
+\section*{Declarations}
+
+\subsection*{Data Availability}
+All datasets generated, analyzed, and supporting the findings of this study are publicly available in the GitHub repository at \url{https://github.com/brentharts/NariaiRelativeEntropy/}.
+
+\subsection*{Code Availability}
+The Python simulation scripts and numerical calculation tools used to produce the figures and analysis in this paper are available in the project repository at \url{https://github.com/brentharts/NariaiRelativeEntropy/}.
+
+\subsection*{Funding}
+The author received no specific funding for this work.
+
+\subsection*{Author Contributions}
+B.H. conceived the theoretical framework, performed the analytical calculations, developed the numerical simulations, analyzed the results, and authored the manuscript.
+
+\subsection*{Competing Interests}
+The author declares no competing interests.
+
+\appendix
+
+\section{Supplementary Material}
+\noindent \emph{Relative Entropy on the Nariai Horizon} (July 10, 2026): 
+\newline \url{https://doi.org/10.5281/zenodo.21303604}
+\newline
+\emph{Annotated Notes and Questions on the Dorau--Much Derivation}: 
+\newline
+\url{https://doi.org/10.5281/zenodo.21382744}
+\newline
+\emph{Source code}: \url{https://github.com/brentharts/NariaiRelativeEntropy}
+
+
+
+
+\begingroup
+\footnotesize
+\begin{thebibliography}{99}\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\bibitem{DorauMuch} P.~Dorau and A.~Much, \emph{From Quantum Relative Entropy to the Semiclassical Einstein Equations}, Phys.\ Rev.\ Lett.\ \textbf{136}, 091602 (2026); arXiv:2510.24491.
+\url{https://doi.org/10.1103/lmq8-nsty}
+
+\bibitem{Jacobson} T.~Jacobson, (1995) \emph{Thermodynamics of Spacetime: The Einstein Equation of State}, Phys.\ Rev.\ Lett.\ \textbf{75}, 1260.
+\url{https://doi.org/10.48550/arXiv.gr-qc/9504004}
+
+\bibitem{Nariai} H.~Nariai, \emph{On a New Cosmological Solution of Einstein's Field Equations of Gravitation}, Gen.\ Relativ.\ Gravit.\ \textbf{31}, 963 (1999). \url{https://doi.org/10.1023/A:1026602724948}
+
+\bibitem{BoussoHawking} R.~Bousso and S.~W.~Hawking, (1998) \emph{(Anti-)evaporation of Schwarzschild--de Sitter black holes}, Phys.\ Rev.\ D \textbf{57}, 2436.
+\url{https://doi.org/10.1103/PhysRevD.57.2436}
+
+\bibitem{KayWald} B.~S.~Kay and R.~M.~Wald, (1991) \emph{Theorems on the uniqueness and thermal properties of stationary, nonsingular, quasifree states on spacetimes with a bifurcate Killing horizon}, Phys.\ Rep.\ \textbf{207}, 49.
+\url{https://doi.org/10.1016/0370-1573(91)90015-E}
+
+\bibitem{SummersVerch} S.~J.~Summers and R.~Verch, (1996) \emph{Modular inclusion, the Hawking temperature, and quantum field theory in curved spacetime}, Lett.\ Math.\ Phys.\ \textbf{37}, 145.
+\url{https://doi.org/10.1007/BF00416017}
+
+\bibitem{KPV} F.~Kurpicz, N.~Pinamonti, and R.~Verch, (2021) \emph{Temperature and entropy--area relation of quantum matter near spherically symmetric outer trapping horizons}, Lett.\ Math.\ Phys.\ \textbf{111}, 110.
+\url{https://doi.org/10.48550/arXiv.2102.11547}
+
+\bibitem{Casini} H.~Casini, (2008) \emph{Relative entropy and the Bekenstein bound}, Class.\ Quantum Grav.\ \textbf{25}, 205021. \url{https://doi.org/10.48550/arXiv.0804.2182}
+
+\bibitem{Hartshorn2025} B.~S.~Hartshorn, \emph{Entropic Gravity and the Nariai Spacetime} (2025). \url{https://doi.org/10.20944/preprints202508.1617.v1}
+
+\bibitem{GinspargPerry} P.~Ginsparg and M.~J.~Perry, (1983) \emph{Semiclassical perdurance of de Sitter space}, Nucl.\ Phys.\ B \textbf{222}, 245.
+\url{https://doi.org/10.1016/0550-3213(83)90636-3}
+
+\bibitem{FLPW} T.~Faulkner, R.~G.~Leigh, O.~Parrikar, and H.~Wang, (2016) \emph{Modular Hamiltonians for deformed half-spaces and the averaged null energy condition}, JHEP \textbf{09}, 038.
+\url{https://doi.org/10.1007/JHEP09(2016)038}
+
+\bibitem{Longo2019} R.~Longo, (2019) \emph{Entropy of coherent excitations}, Lett.\ Math.\ Phys.\ \textbf{109}, 2587.
+\url{https://doi.org/10.1007/s11005-019-01196-6}
+
+\bibitem{CLR} F.~Ciolli, R.~Longo, and G.~Ruzzi, (2020) \emph{The information in a wave}, Commun.\ Math.\ Phys.\ \textbf{379}, 979. \url{https://arxiv.org/abs/1906.01707v2}
+
+\bibitem{Shale} D.~Shale, \emph{Linear symmetries of free boson fields}, Trans.\ Amer.\ Math.\ Soc.\ \textbf{103}, 149 (1962). \url{https://doi.org/10.1090/S0002-9947-1962-0137504-6}
+
+\bibitem{ADLS} D.~Anninos, F.~Denef, Y.~T.~A.~Law, and Z.~Sun, (2022) \emph{Quantum de Sitter horizon entropy from quasicanonical bulk, edge, sphere and topological string partition functions}, JHEP \textbf{01}, 088; arXiv:2009.12464.
+\url{https://doi.org/10.1007/JHEP01(2022)088}
+
+\bibitem{LawLochabPRL} Y.~T.~A.~Law and V.~Lochab, (2026) \emph{Horizon Edge Partition Functions in $\Lambda>0$ Quantum Gravity}, Phys.\ Rev.\ Lett.\ \textbf{136}, 151601; arXiv:2603.20913.
+\url{https://doi.org/10.1103/c683-tqw8}
+
+\bibitem{LawLochabPRD} Y.~T.~A.~Law and V.~Lochab, \emph{Gravitons on Nariai edges}, Phys.\ Rev.\ D \textbf{113}, 086006 (2026); arXiv:2506.02142.
+\url{https://doi.org/10.1103/23vk-l1fl}
+
+\bibitem{Mukherjee} J.~Mukherjee, (2026) \emph{Quasinormal bulk-edge characters of gravitons in Nariai geometry}, Phys.\ Rev.\ D; arXiv:2506.07556.
+\url{https://doi.org/10.1103/bqgb-zzgy}
+
+\bibitem{NakamotoOshita} N.~Nakamoto and N.~Oshita, (2026) \emph{Exceptional Lines and Excitation of (Nearly) Double-Pole Quasinormal Modes: A Semi-Analytic Study in the Nariai Black Hole}, arXiv:2601.00704.
+\newline \url{https://arxiv.org/abs/2601.00704}
+
+\bibitem{AalsmaFaruk} L.~Aalsma and M.~M.~Faruk, (2026) \emph{Complex Geodesics in the Nariai Geometry}, arXiv:2604.26662.
+\newline \url{https://arxiv.org/abs/2604.26662}
+
+
+\bibitem{Ciambelli2026} L.~Ciambelli, J.~Kowalski-Glikman, and L.~Varrin, \emph{Entanglement entropy of quantum corners}, JHEP \textbf{02} (2026) 188. \url{https://doi.org/10.1007/JHEP02(2026)188}
+
+\bibitem{Panella2025} E.~Panella, \emph{New insights on classical-quantum gravitational backreaction} (2025). \newline \url{https://discovery.ucl.ac.uk/id/eprint/10212594/}
+
+\bibitem{Bianconi2025} G.~Bianconi, (2025) \emph{Gravity from entropy}, Phys.\ Rev.\ D \textbf{111}, 066001; arXiv:2408.14391.
+\newline \url{https://doi.org/10.48550/arXiv.2408.14391}
+
+\bibitem{Bianconi2026} G.~Bianconi, (2026) \emph{The Thermodynamics of the Gravity from Entropy Theory}, arXiv:2510.22545.
+\newline \url{https://doi.org/10.48550/arXiv.2510.22545}
+
+\bibitem{MertensTuriaci} T.~G.~Mertens and G.~J.~Turiaci, (2023) \emph{Solvable models of quantum black holes: a review on Jackiw--Teitelboim gravity}, Living Rev.\ Relativ.\ \textbf{26}, 4.
+\url{https://doi.org/10.1007/s41114-023-00046-1}
+
+\bibitem{FanarasVilenkin} G.~Fanaras and A.~Vilenkin, (2022) \emph{Jackiw--Teitelboim and Kantowski--Sachs quantum cosmology}, JCAP \textbf{03} (2022) 056.
+\url{https://doi.org/10.1088/1475-7516/2022/03/056}
+
+\bibitem{Rusalev} T.~Rusalev, (2025) \emph{Entanglement Entropy in Jackiw--Teitelboim de Sitter gravity with Timelike Boundaries}, arXiv:2509.12975. \url{https://arxiv.org/abs/2509.12975}
+
+
+\bibitem{FordRoman} L.~H.~Ford and T.~A.~Roman, (1999) \emph{The quantum interest conjecture}, Phys.\ Rev.\ D \textbf{60}, 104018.
+\newline
+\url{https://doi.org/10.1103/PhysRevD.60.104018}
+
+\bibitem{QNEC} R.~Bousso, Z.~Fisher, S.~Leichenauer, and A.~C.~Wall, (2016) \emph{Quantum focusing conjecture}, Phys.\ Rev.\ D \textbf{93}, 064044.
+\url{https://doi.org/10.1103/PhysRevD.93.064044}
+
+\end{thebibliography}
+\endgroup
+
+\end{document}
