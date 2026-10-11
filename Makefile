@@ -7,6 +7,7 @@
 #   make convergence  -> grid and truncation study
 #   make lean         -> regenerate and kernel-check NariaiFacts.lean
 #   make exact        -> exact-spectrum packet + Fock relative entropy
+#   make check        -> the referee-report checks (signs, zero modes, horizon areas)
 #   make docs     -> supplementary
 #   make clean        -> remove build artifacts (keeps PDFs)
 #   make distclean    -> remove build artifacts and PDFs
@@ -46,6 +47,9 @@ lean: nariailean.py nariai_exact.py
 
 exact: nariai_exact.py
 	$(PY) nariai_exact.py
+
+check: check_referee_points.py
+	$(PY) check_referee_points.py
 
 
 
