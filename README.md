@@ -74,9 +74,12 @@ is the zero-total-boost-frequency Fourier component of `(d_u chi)^2` and
 
 | File | Purpose |
 |---|---|
-| `nariai_relative_entropy_v10.tex` | Current manuscript (revised after the referee report; supersedes v9) |
+| `nariai_relative_entropy_v13.tex` | Current manuscript (v12 made self-contained: no appendix, no dependence on the companion note; supersedes v12 to v9) |
+| `nariai_relative_entropy_v12.tex` | Previous (v11 plus Section on what fixes the coefficient 1/4) |
 | `RESPONSE_TO_REFEREE.md` | Point-by-point response and what was verified |
 | `check_referee_points.py` | Symbolic/numerical checks of the referee's claims: dS2 zero modes and sign, retarded vs teleological response, SdS horizon areas (`make check`) |
+| `check_normalization.py` | No-go for deriving the 1/4, and the two-route test (Wald entropy vs Deser-Tekin charge) that the same G_N governs the horizon and infinity |
+| `check_open_items.py` | Checks for the four items left open in v10: modular-flow orientation, all dilaton-equation components, seed-amplitude window, l >= 1 and wedge-local excitations |
 | `supplementary.tex` | Supplementary material: TikZ diagrams + numerical figures |
 | `appendix_b_verification.py` | Numerical checks for Appendix B (I2 vanishing, negativity windows, one-mode sum rule) |
 | `nariailean.py` | Emits `NariaiFacts.lean`: the finite algebra behind Appendix B |
