@@ -74,7 +74,8 @@ is the zero-total-boost-frequency Fourier component of `(d_u chi)^2` and
 
 | File | Purpose |
 |---|---|
-| `nariai_relative_entropy_v14.tex` | Current manuscript (v13 plus a paragraph on compactification, G_N = G_D/(F V))  |
+| `nariai_relative_entropy_v15.tex` | Current manuscript (v14 plus the Riemann^2 term in the compactification paragraph) |
+| `nariai_relative_entropy_v14.tex` | Previous manuscript (v13 plus a paragraph on compactification, G_N = G_D/(F V))  |
 | `nariai_relative_entropy_v13.tex` | Previous manuscript (v12 made self-contained: no appendix, no dependence on the companion note; supersedes v12 to v9) |
 | `nariai_relative_entropy_v12.tex` | Previous (v11 plus Section on what fixes the coefficient 1/4) |
 | `RESPONSE_TO_REFEREE.md` | Point-by-point response and what was verified |

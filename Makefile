@@ -21,7 +21,7 @@ FIGS    := figures/fig_flux_windows.pdf \
            figures/fig_one_mode.pdf
 
 # Current manuscript: change this one line when a new version is written.
-PAPER   ?= nariai_relative_entropy_v14
+PAPER   ?= nariai_relative_entropy_v15
 
 OPEN    := $(shell command -v xdg-open 2>/dev/null || command -v open 2>/dev/null)
 
