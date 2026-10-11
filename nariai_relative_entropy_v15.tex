@@ -41,7 +41,7 @@ The geometry is $dS_2 \times S^2$, the degenerate limit of the Schwarzschild--de
 
 \paragraph{What is taken from the literature, and what is new.} The scaling-limit two-point function and the modular structure on a bifurcate Killing horizon are due to Kay and Wald \cite{KayWald} and to Summers and Verch \cite{SummersVerch}; the formula for the relative entropy of a coherent excitation, and its identification with the boost-energy flux, are due to Kurpicz, Pinamonti and Verch \cite{KPV} and to Dorau and Much \cite{DorauMuch}. Sections~\ref{sec:algebra}--\ref{sec:entropy} apply their results to \Nariai{}, and several displayed equations coincide with those of Ref.~\cite{DorauMuch} (we mark this where it occurs). The dimensional reduction of the throat to de~Sitter JT gravity is standard \cite{MertensTuriaci}. What is specific to this paper is modest: the finite factorization \eqref{eq:factorized} and the closed-form family of Section~\ref{sec:example}; the consistency check of Section~\ref{sec:JT}, including the correct sign of the dilaton equation, the dependence on boundary conditions, and the zero modes; the statement of the window of validity of the static modular description in Section~\ref{sec:timescales}; and the scope remark that the coupling is Einstein's (Section~\ref{sec:JT}).
 
-The Dorau--Much quantity \eqref{eq:DM-pivot} is not a von Neumann entropy of a hidden substrate; it is a \emph{relative} entropy, the information-theoretic distinguishability of the realized state $\omega_\phi$ from the counterfactual vacuum $\omega_0$. It measures, in the only sense the algebraic theory makes available, how
+The Dorau--Much quantity \eqref{eq:DM-pivot} is not a von Neumann entropy of a hidden substrate; it is a \emph{relative} entropy, the information-theoretic distinguishability of the realized state $\omega_\phi$ from the \emph{counterfactual vacuum} $\omega_0$. It measures, in the only sense the algebraic theory makes available, how
 much the world that happened differs from the world that did not.
 
 
@@ -589,12 +589,11 @@ We have also checked that the $s$-wave sector, linearized de~Sitter JT gravity, 
 The static modular description of the Nariai background holds for excitations of boost-time support $\kappa\Delta u\ll\ln S_{\mathrm N}$, since the instability grows classically at the Hubble rate. For coherent states, positivity of the relative entropy reproduces the focusing theorem and no more. The consistency check extends to all harmonics at linear order, and to every wedge-local unitary excitation (Section~\ref{sec:outlook}). Open problems are a justification of the normalization that does not pass through the Einstein equations, states outside the wedge-local class, and the derivation of the quantum side of the relation for modified gravity.
 
 \section*{Declarations}
+\footnotesize
 
-\subsection*{Data Availability}
-All datasets generated, analyzed, and supporting the findings of this study are publicly available in the GitHub repository at \url{https://github.com/brentharts/NariaiRelativeEntropy/}.
-
-\subsection*{Code Availability}
-The Python simulation scripts and numerical calculation tools used to produce the figures and analysis in this paper are available in the project repository at \url{https://github.com/brentharts/NariaiRelativeEntropy/}.
+\subsection*{Source Code and Data Availability}
+All datasets generated, analyzed, and supporting the findings of this study are publicly available in the GitHub repository at \url{https://github.com/brentharts/NariaiRelativeEntropy/}
+and \url{https://github.com/brentharts/CICY}.
 
 \subsection*{Funding}
 The author received no specific funding for this work.
@@ -613,18 +612,23 @@ The author declares no competing interests.
 
 \bibitem{Jacobson} T.~Jacobson, \emph{Thermodynamics of Spacetime: The Einstein Equation of State}, Phys.\ Rev.\ Lett.\ \textbf{75}, 1260 (1995); arXiv:gr-qc/9504004. \url{https://doi.org/10.1103/PhysRevLett.75.1260}
 
-\bibitem{Nariai} H.~Nariai, Sci.\ Rep.\ Tohoku Univ.\ \textbf{34}, 160 (1950) and \textbf{35}, 62 (1951); reprinted as \emph{On a New Cosmological Solution of Einstein's Field Equations of Gravitation}, Gen.\ Relativ.\ Gravit.\ \textbf{31}, 963 (1999). \url{https://doi.org/10.1023/A:1026602724948}
+\bibitem{Nariai} H.~Nariai, Sci.\ Rep.\ Tohoku Univ.\ \textbf{34}, 160 (1950) and \textbf{35}, 62 (1951); reprinted as \emph{On a New Cosmological Solution of Einstein's Field Equations of Gravitation}, Gen.\ Relativ.\ Gravit.\
+\newline
+\textbf{31}, 963 (1999). \url{https://doi.org/10.1023/A:1026602724948}
 
 \bibitem{BoussoHawking} R.~Bousso and S.~W.~Hawking, (1998) \emph{(Anti-)evaporation of Schwarzschild--de Sitter black holes}, Phys.\ Rev.\ D \textbf{57}, 2436.
 \url{https://doi.org/10.1103/PhysRevD.57.2436}
 
 \bibitem{KayWald} B.~S.~Kay and R.~M.~Wald, (1991) \emph{Theorems on the uniqueness and thermal properties of stationary, nonsingular, quasifree states on spacetimes with a bifurcate Killing horizon}, Phys.\ Rep.\ \textbf{207}, 49.
+\newline
 \url{https://doi.org/10.1016/0370-1573(91)90015-E}
 
 \bibitem{SummersVerch} S.~J.~Summers and R.~Verch, (1996) \emph{Modular inclusion, the Hawking temperature, and quantum field theory in curved spacetime}, Lett.\ Math.\ Phys.\ \textbf{37}, 145.
 \url{https://doi.org/10.1007/BF00416017}
 
-\bibitem{KPV} F.~Kurpicz, N.~Pinamonti, and R.~Verch, (2021) \emph{Temperature and entropy--area relation of quantum matter near spherically symmetric outer trapping horizons}, Lett.\ Math.\ Phys.\ \textbf{111}, 110 (2021); arXiv:2102.11547. \url{https://doi.org/10.1007/s11005-021-01445-7}
+\bibitem{KPV} F.~Kurpicz, N.~Pinamonti, and R.~Verch, (2021) \emph{Temperature and entropy--area relation of quantum matter near spherically symmetric outer trapping horizons}, Lett.\ Math.\ Phys.\ \textbf{111}, 110 (2021); arXiv:2102.11547. 
+\newline
+\url{https://doi.org/10.1007/s11005-021-01445-7}
 
 \bibitem{GinspargPerry} P.~Ginsparg and M.~J.~Perry, (1983) \emph{Semiclassical perdurance of de Sitter space}, Nucl.\ Phys.\ B \textbf{222}, 245.
 \url{https://doi.org/10.1016/0550-3213(83)90636-3}
@@ -638,7 +642,9 @@ The author declares no competing interests.
 \bibitem{Mukherjee} J.~Mukherjee, (2026) \emph{Quasinormal bulk-edge characters of gravitons in Nariai geometry}, Phys.\ Rev.\ D; arXiv:2506.07556.
 \url{https://doi.org/10.1103/bqgb-zzgy}
 
-\bibitem{Bianconi2025} G.~Bianconi, (2025) \emph{Gravity from entropy}, Phys.\ Rev.\ D \textbf{111}, 066001; arXiv:2408.14391. \url{https://doi.org/10.1103/PhysRevD.111.066001}
+\bibitem{Bianconi2025} G.~Bianconi, (2025) \emph{Gravity from entropy}, Phys.\ Rev.\ D \textbf{111}, 066001; arXiv:2408.14391. 
+\newline
+\url{https://doi.org/10.1103/PhysRevD.111.066001}
 
 \bibitem{Bianconi2026} G.~Bianconi, (2026) \emph{The Thermodynamics of the Gravity from Entropy Theory}, arXiv:2510.22545.
 \newline \url{https://doi.org/10.48550/arXiv.2510.22545}
@@ -654,18 +660,29 @@ The author declares no competing interests.
 
 \bibitem{DAngelo} E.~D'Angelo, M.~B.~Fr\"ob, S.~Galanda, P.~Meda, A.~Much, and K.~Papadopoulos, \emph{Entropy--area law and temperature of de~Sitter horizons from modular theory}, Prog.\ Theor.\ Exp.\ Phys.\ \textbf{2024}, 021A01 (2024); arXiv:2311.13990. \url{https://doi.org/10.1093/ptep/ptae003}
 
-\bibitem{Bousso1998} R.~Bousso, \emph{Proliferation of de Sitter space}, Phys.\ Rev.\ D \textbf{58}, 083511 (1998); arXiv:hep-th/9805081. \url{https://doi.org/10.1103/PhysRevD.58.083511}
+\bibitem{Bousso1998} R.~Bousso, \emph{Proliferation of de Sitter space}, Phys.\ Rev.\ D \textbf{58}, 083511 (1998); arXiv:hep-th/9805081. 
+\newline
+\url{https://doi.org/10.1103/PhysRevD.58.083511}
 
-\bibitem{DeserTekin2003} S.~Deser and B.~Tekin, \emph{Energy in generic higher curvature gravity theories}, Phys.\ Rev.\ D \textbf{67}, 084009 (2003); arXiv:hep-th/0212292.
+\bibitem{DeserTekin2003} S.~Deser and B.~Tekin, \emph{Energy in generic higher curvature gravity theories}, Phys.\ Rev.\ D \textbf{67}, 084009 (2003).
+\url{https://doi.org/10.1103/PhysRevD.67.084009}
 
 \bibitem{BarbourLobo} J.~Barbour, F.~S.~N.~Lobo, and M.~I.~R.~Louren\c{c}o, \emph{Structural morphology and the gravitational arrow of time}, arXiv:2607.27526.
+\url{https://doi.org/10.48550/arXiv.2607.27526}
 
 \bibitem{BarbourLourenco} J.~Barbour and M.~I.~R.~Louren\c{c}o, \emph{A Scale-Invariant Theory of the Universe}, arXiv:2608.05929.
+\newline
+\url{https://doi.org/10.48550/arXiv.2608.05929}
 
 \bibitem{BarbourEntropy} J.~Barbour, \emph{Entropy and Cosmological Arrows of Time}, arXiv:2108.10074.
+\newline
+\url{https://doi.org/10.48550/arXiv.2108.10074}
 
 \bibitem{Sewell} G.~L.~Sewell, \emph{Quantum fields on manifolds: PCT and gravitationally induced thermal states}, Ann.\ Phys.\ \textbf{141}, 201 (1982). \url{https://doi.org/10.1016/0003-4916(82)90285-8}
+
 \bibitem{Cadamuro} D.~Cadamuro, M.~B.~Fr\"ob, D.~Katsinis, and J.~Mandrysch, \emph{Finite relative entropy for locally squeezed states}, arXiv:2511.11203.
+\url{https://doi.org/10.48550/arXiv.2511.11203}
+
 \end{thebibliography}
 \endgroup
 
