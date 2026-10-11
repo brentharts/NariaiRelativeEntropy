@@ -1,6 +1,8 @@
 # NariaiRelativeEntropy -- build system
 #
-#   make              -> supplementary.pdf (figures + TikZ document)
+#   make              -> the paper (PAPER below), built with pdflatex twice
+#   make paper        -> same as above
+#   make supplementary -> supplementary.pdf (figures + TikZ document)
 #   make figures      -> regenerate matplotlib figures into figures/
 #   make verify       -> run the Appendix B numerical checks
 #   make selftest     -> pass/fail assertions on every claim
@@ -8,7 +10,6 @@
 #   make lean         -> regenerate and kernel-check NariaiFacts.lean
 #   make exact        -> exact-spectrum packet + Fock relative entropy
 #   make check        -> the referee-report checks and the open-item checks
-#   make docs     -> supplementary
 #   make clean        -> remove build artifacts (keeps PDFs)
 #   make distclean    -> remove build artifacts and PDFs
 
@@ -19,10 +20,23 @@ FIGS    := figures/fig_flux_windows.pdf \
            figures/fig_dichotomy.pdf \
            figures/fig_one_mode.pdf
 
-default:
-	pdflatex supplementary.tex
-	pdflatex supplementary.tex
-	open supplementary.pdf
+# Current manuscript: change this one line when a new version is written.
+PAPER   ?= nariai_relative_entropy_v13
+
+OPEN    := $(shell command -v xdg-open 2>/dev/null || command -v open 2>/dev/null)
+
+default: paper
+
+paper:
+	$(LATEX) $(PAPER).tex
+	$(LATEX) $(PAPER).tex
+
+view: paper
+	$(OPEN) $(PAPER).pdf
+
+supplementary:
+	$(LATEX) supplementary.tex
+	$(LATEX) supplementary.tex
 
 
 # --- figures -----------------------------------------------------------
@@ -31,7 +45,7 @@ $(FIGS) &: generate_figures.py
 
 figures: $(FIGS)
 
-# --- numerical verification (Appendix B of the main paper) --------------
+# --- numerical verification (the checks the paper refers to) --------------
 verify: appendix_b_verification.py
 	$(PY) appendix_b_verification.py
 
@@ -62,5 +76,7 @@ clean:
 	rm -f *.aux *.log *.out *.toc *.synctex.gz
 
 distclean: clean
-	rm -f supplementary.pdf
+	rm -f supplementary.pdf $(PAPER).pdf
 	rm -rf figures/ __pycache__/
+
+.PHONY: default paper view supplementary figures verify selftest convergence lean exact check clean distclean
